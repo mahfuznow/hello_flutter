@@ -10,7 +10,7 @@
 - Environment Configuration (DotEnv)
 - BuildFlavors (Dev, Test, Staging, Prod)
 
-##TODO
+## TODO
 - Dependency Injection
 - Code Generation
 - Unit Testing
