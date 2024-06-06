@@ -1,6 +1,6 @@
 import 'package:hello_flutter/data/model/movie.dart';
 import 'package:hello_flutter/data/model/movie_details.dart';
-import 'package:hello_flutter/data/remote/movie_api_client.dart';
+import 'package:hello_flutter/data/remote/api_client/movie_api_client.dart';
 import 'package:hello_flutter/data/repository/movie_repository.dart';
 
 class MovieRepositoryImpl implements MovieRepository {
