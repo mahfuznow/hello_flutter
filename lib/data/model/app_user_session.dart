@@ -1,5 +1,5 @@
 import 'package:hello_flutter/base/model/mappable.dart';
-import 'package:hello_flutter/data/local/shared_prefable.dart';
+import 'package:hello_flutter/data/local/shared_preference/shared_prefable.dart';
 
 class AppUserSession extends SharedPrefable {
   String userId;

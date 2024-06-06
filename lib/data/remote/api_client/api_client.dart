@@ -6,10 +6,11 @@ import 'package:http/http.dart' as http;
 
 abstract class ApiClient {
   String get baseUrl;
+  String get bearerToken;
 
   Future<Map<String, String>> getCustomHeader() async {
     return {
-      'Authorization': 'Bearer YOUR_ACCESS_TOKEN',
+      'Authorization': 'Bearer $bearerToken',
       'Content-Type': 'application/json',
     };
   }
