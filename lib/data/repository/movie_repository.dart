@@ -1,10 +1,10 @@
-import 'package:hello_flutter/data/model/movie.dart';
-import 'package:hello_flutter/data/model/movie_details.dart';
+import 'package:hello_flutter/data/model/movie_model.dart';
+import 'package:hello_flutter/data/model/movie_details_model.dart';
 
 abstract class MovieRepository {
-  Future<List<Movie>> getMovieList();
+  Future<List<MovieModel>?> getMovieList();
 
-  Future<MovieDetails> getMovieDetails(int movieId);
+  Future<MovieDetailsModel> getMovieDetails(int movieId);
 
-  Future<List<Movie>> searchMovies(String query);
+  Future<List<MovieModel>> searchMovies(String query);
 }

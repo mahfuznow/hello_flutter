@@ -32,18 +32,37 @@ class HomeUiMobilePortraitState extends BaseUiState<HomeUiMobilePortrait> {
         centerTitle: true,
       ),
       body: _homeBody(context),
+      bottomNavigationBar: _bottomNavigation(),
     );
   }
 
   Widget _homeBody(BuildContext context) {
+    return PageView(
+      onPageChanged: (index) => widget.viewModel.onPageChanged(index),
+      physics: const NeverScrollableScrollPhysics(),
+      children: widget.viewModel.navigationItems.map((e) => e.page).toList(),
+    );
+  }
+
+  Widget _bottomNavigation() {
     return valueListenableBuilder(
-      listenable: widget.viewModel.userId,
+      listenable: widget.viewModel.currentPageIndex,
       builder: (context, value) {
-        return Center(
-          child: Text(
-            "Home, UserId: $value",
-            style: Theme.of(context).textTheme.titleLarge,
-          ),
+        return NavigationBar(
+          elevation: Dimens.dimen_10,
+          surfaceTintColor: Theme.of(context).colorScheme.primary,
+          selectedIndex: value,
+          onDestinationSelected: (index) =>
+              widget.viewModel.onNavigationItemClicked(index),
+          destinations: widget.viewModel.navigationItems
+              .map(
+                (e) => NavigationDestination(
+                  icon: Icon(e.icon),
+                  selectedIcon: Icon(e.selectedIcon),
+                  label: e.label,
+                ),
+              )
+              .toList(),
         );
       },
     );

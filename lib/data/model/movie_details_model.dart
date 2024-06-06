@@ -1,4 +1,4 @@
-class MovieDetails {
+class MovieDetailsModel {
   final String title;
   final String overview;
   final String releaseDate;
@@ -7,7 +7,7 @@ class MovieDetails {
   final double voteAverage;
   final int voteCount;
 
-  MovieDetails({
+  MovieDetailsModel({
     required this.title,
     required this.overview,
     required this.releaseDate,
@@ -17,8 +17,8 @@ class MovieDetails {
     required this.voteCount,
   });
 
-  factory MovieDetails.fromJson(Map<String, dynamic> json) {
-    return MovieDetails(
+  factory MovieDetailsModel.fromJson(Map<String, dynamic> json) {
+    return MovieDetailsModel(
       title: json['title'],
       overview: json['overview'],
       releaseDate: json['release_date'],

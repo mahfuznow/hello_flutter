@@ -1,21 +1,25 @@
 import 'package:hello_flutter/data/remote/api_client/api_client.dart';
 import 'package:hello_flutter/data/remote/api_service/movie_api_service.dart';
+import 'package:hello_flutter/data/remote/response/movie_details_response.dart';
+import 'package:hello_flutter/data/remote/response/movie_list_response.dart';
 
 class MovieApiServiceImpl implements MovieApiService {
   ApiClient apiClient;
 
-  MovieApiServiceImpl(this.apiClient);
+  MovieApiServiceImpl({required this.apiClient});
 
   @override
-  Future<Map<String, dynamic>> getMovies() async {
-    return apiClient.get("/list_movies.json");
+  Future<MovieListResponse> getMovies() async {
+    final response = await apiClient.get("/list_movies.json");
+    return MovieListResponse.fromJson(response);
   }
 
   @override
-  Future<Map<String, dynamic>> getMovieDetails(int movieId) {
-    return apiClient.get(
+  Future<MovieDetailsResponse> getMovieDetails(int movieId) async {
+    final response = await apiClient.get(
       "/movie_details.json",
       queryParameters: {"movie_id": movieId},
     );
+    return MovieDetailsResponse.fromJson(response);
   }
 }

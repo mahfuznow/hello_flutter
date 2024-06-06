@@ -1,4 +1,8 @@
+import 'package:hello_flutter/data/remote/response/movie_details_response.dart';
+import 'package:hello_flutter/data/remote/response/movie_list_response.dart';
+
 abstract class MovieApiService {
-  Future<Map<String, dynamic>> getMovies();
-  Future<Map<String, dynamic>> getMovieDetails(int movieId);
+  Future<MovieListResponse> getMovies();
+
+  Future<MovieDetailsResponse> getMovieDetails(int movieId);
 }
