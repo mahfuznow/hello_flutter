@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hello_flutter/base/base_viewmodel.dart';
 import 'package:hello_flutter/common/extension/context_ext.dart';
+import 'package:hello_flutter/data/model/app_user_session.dart';
+import 'package:hello_flutter/data/repository/auth_repository.dart';
 import 'package:hello_flutter/feature/auth/login/route/login_argument.dart';
 import 'package:hello_flutter/feature/auth/validator/email_validator.dart';
 import 'package:hello_flutter/feature/auth/validator/password_validator.dart';
@@ -8,8 +10,13 @@ import 'package:hello_flutter/feature/home/route/home_argument.dart';
 import 'package:hello_flutter/feature/home/route/home_route.dart';
 import 'package:hello_flutter/localization/text_id.dart';
 import 'package:hello_flutter/localization/ui_text.dart';
+import 'package:hello_flutter/util/app_logger.dart';
 
 class LoginViewModel extends BaseViewModel<LoginArgument> {
+  final AuthRepository authRepository;
+
+  LoginViewModel({required this.authRepository});
+
   final TextEditingController emailTextEditingController =
       TextEditingController();
   final TextEditingController passwordTextEditingController =
@@ -79,7 +86,17 @@ class LoginViewModel extends BaseViewModel<LoginArgument> {
       );
       return;
     }
-    navigateToScreen(destination: HomeRoute(arguments: HomeArgument(userId: '123')));
+    authRepository.login(
+      email: emailTextEditingController.text,
+      password: passwordTextEditingController.text,
+    ).then((appUserSession) {
+      navigateToScreen(
+          destination: HomeRoute(arguments: HomeArgument(userId: '123')));
+    }).onError(
+      (error, stackTrace) {
+        AppLogger.e("An error occurred while login");
+      },
+    );
   }
 
   @override
