@@ -12,13 +12,8 @@ class HomeRoute extends BaseRoute {
 
   @override
   MaterialPageRoute toMaterialPageRoute() {
-    if (arguments is HomeArgument) {
-      final homeArgument = arguments as HomeArgument;
-      return MaterialPageRoute(
-        builder: (_) => HomeAdaptiveUi(argument: homeArgument),
-      );
-    } else {
-      throw Exception('Invalid argument type');
-    }
+    return MaterialPageRoute(
+      builder: (_) => HomeAdaptiveUi(argument: arguments as HomeArgument),
+    );
   }
 }
