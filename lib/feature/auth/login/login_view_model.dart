@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hello_flutter/base/base_viewmodel.dart';
 import 'package:hello_flutter/common/extension/context_ext.dart';
-import 'package:hello_flutter/data/model/app_user_session.dart';
 import 'package:hello_flutter/data/repository/auth_repository.dart';
 import 'package:hello_flutter/feature/auth/login/route/login_argument.dart';
 import 'package:hello_flutter/feature/auth/validator/email_validator.dart';
@@ -86,16 +85,16 @@ class LoginViewModel extends BaseViewModel<LoginArgument> {
       );
       return;
     }
-    authRepository.login(
-      email: emailTextEditingController.text,
-      password: passwordTextEditingController.text,
-    ).then((appUserSession) {
-      navigateToScreen(
-          destination: HomeRoute(arguments: HomeArgument(userId: '123')));
-    }).onError(
-      (error, stackTrace) {
-        AppLogger.e("An error occurred while login");
-      },
+
+    final userSession = await loadData(
+      () => authRepository.login(
+        email: emailTextEditingController.text,
+        password: passwordTextEditingController.text,
+      )
+    );
+
+    navigateToScreen(
+      destination: HomeRoute(arguments: HomeArgument(userId: '123')),
     );
   }
 
