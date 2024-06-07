@@ -21,7 +21,7 @@ class MovieModel {
       title: movie.title ?? '',
       year: movie.year ?? 0,
       rating: movie.rating?.toDouble() ?? 0.0,
-      poster: movie.largeCoverImage ?? '',
+      poster: movie.smallCoverImage ?? '',
     );
   }
 }

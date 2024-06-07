@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hello_flutter/base/base_ui_state.dart';
+import 'package:hello_flutter/common/widget/network_image_view.dart';
 import 'package:hello_flutter/data/model/movie_model.dart';
 import 'package:hello_flutter/feature/home/movie_list/movie_list_view_model.dart';
 import 'package:hello_flutter/values/dimens.dart';
@@ -45,8 +46,9 @@ class MovieListUiMobilePortraitState
           vertical: Dimens.dimen_8,
           horizontal: Dimens.dimen_16,
         ),
-        leading: Image.network(
-          movieModel.poster,
+        leading: NetworkImageView(
+          url: movieModel.poster,
+          width: Dimens.dimen_50,
           fit: BoxFit.fitHeight,
         ),
         title: Text(
