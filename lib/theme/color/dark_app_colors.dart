@@ -23,13 +23,13 @@ class DarkAppColors extends AppColors {
   Color onSecondaryContainer = const Color(0xFFD0E4FF);
 
   @override
-  Color tertiary = const Color(0xFF90DA58);
+  Color tertiary = const Color(0xFF5899DA);
   @override
-  Color onTertiary = const Color(0xFF183800);
+  Color onTertiary = const Color(0xFF001838);
   @override
-  Color tertiaryContainer = const Color(0xFF265100);
+  Color tertiaryContainer = const Color(0xFF001C51);
   @override
-  Color onTertiaryContainer = const Color(0xFFABF771);
+  Color onTertiaryContainer = const Color(0xFF7197F7);
 
   @override
   Color error = const Color(0xFFFFB4AB);
@@ -43,11 +43,11 @@ class DarkAppColors extends AppColors {
   @override
   Color background = const Color(0xFF00090f);
   @override
-  Color onBackground = const Color(0xFF42d4fc);
+  Color onBackground = const Color(0xff42affc);
   @override
   Color surface = const Color(0xFF01121f);
   @override
-  Color onSurface = const Color(0xFF42d4fc);
+  Color onSurface = const Color(0xff42affc);
 
   @override
   Color surfaceVariant = const Color(0xFF414941);
@@ -61,17 +61,17 @@ class DarkAppColors extends AppColors {
   @override
   Brightness brightness = Brightness.dark;
   @override
-  Color inversePrimary = const Color(0xFF006D32);
+  Color inversePrimary = const Color(0xFF003C6D);
   @override
-  Color inverseSurface = const Color(0xFF6FF7F3);
+  Color inverseSurface = const Color(0xFF6FBAF7);
   @override
-  Color onInverseSurface = const Color(0xFF003736);
+  Color onInverseSurface = const Color(0xFF001E37);
   @override
   Color scrim = const Color(0xFF000000);
   @override
   Color shadow = const Color(0xFF000000);
   @override
-  Color surfaceTint = const Color(0xFF77DB8D);
+  Color surfaceTint = const Color(0xFF77A6DB);
 
   @override
   Color tripInfoChipIconColor = Colors.white;

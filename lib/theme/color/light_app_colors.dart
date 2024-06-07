@@ -22,11 +22,11 @@ class LightAppColors extends AppColors {
   Color onSecondaryContainer = const Color(0xFF001D35);
 
   @override
-  Color tertiary = const Color(0xFF346B00);
+  Color tertiary = const Color(0xFF003E6B);
   @override
   Color onTertiary = const Color(0xFFFFFFFF);
   @override
-  Color tertiaryContainer = const Color(0xFFABF771);
+  Color tertiaryContainer = const Color(0xFF71A0F7);
   @override
   Color onTertiaryContainer = const Color(0xFF0B2000);
 
@@ -63,20 +63,20 @@ class LightAppColors extends AppColors {
   @override
   Brightness brightness = Brightness.light;
   @override
-  Color inversePrimary = const Color(0xFF77DB8D);
+  Color inversePrimary = const Color(0xFF779ADB);
   @override
-  Color inverseSurface = const Color(0xFF003736);
+  Color inverseSurface = const Color(0xFF001E37);
   @override
-  Color onInverseSurface = const Color(0xFFAFFFFC);
+  Color onInverseSurface = const Color(0xFFAFDBFF);
   @override
   Color scrim = const Color(0xFF000000);
   @override
   Color shadow = const Color(0xFF000000);
   @override
-  Color surfaceTint = const Color(0xFF006D32);
+  Color surfaceTint = const Color(0xFF0596CB);
 
   @override
   Color tripInfoChipIconColor = Colors.black;
   @override
-  Color neutralVariant95 = const Color(0xFFEBF3E8);
+  Color neutralVariant95 = const Color(0xFFE8F2F3);
 }
