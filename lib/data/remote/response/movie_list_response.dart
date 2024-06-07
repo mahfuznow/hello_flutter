@@ -203,10 +203,8 @@ final statValues = EnumValues({
 class Torrent {
   String? url;
   String? hash;
-  Quality? quality;
   Type? type;
   String? isRepack;
-  VideoCodec? videoCodec;
   String? bitDepth;
   String? audioChannels;
   int? seeds;
@@ -219,10 +217,8 @@ class Torrent {
   Torrent({
     this.url,
     this.hash,
-    this.quality,
     this.type,
     this.isRepack,
-    this.videoCodec,
     this.bitDepth,
     this.audioChannels,
     this.seeds,
@@ -236,10 +232,7 @@ class Torrent {
   factory Torrent.fromJson(Map<String, dynamic> json) => Torrent(
     url: json["url"],
     hash: json["hash"],
-    quality: qualityValues.map[json["quality"]]!,
-    type: typeValues.map[json["type"]]!,
     isRepack: json["is_repack"],
-    videoCodec: videoCodecValues.map[json["video_codec"]]!,
     bitDepth: json["bit_depth"],
     audioChannels: json["audio_channels"],
     seeds: json["seeds"],
@@ -253,10 +246,7 @@ class Torrent {
   Map<String, dynamic> toJson() => {
     "url": url,
     "hash": hash,
-    "quality": qualityValues.reverse[quality],
-    "type": typeValues.reverse[type],
     "is_repack": isRepack,
-    "video_codec": videoCodecValues.reverse[videoCodec],
     "bit_depth": bitDepth,
     "audio_channels": audioChannels,
     "seeds": seeds,
@@ -267,34 +257,6 @@ class Torrent {
     "date_uploaded_unix": dateUploadedUnix,
   };
 }
-
-enum Quality {
-  THE_1080_P,
-  THE_720_P
-}
-
-final qualityValues = EnumValues({
-  "1080p": Quality.THE_1080_P,
-  "720p": Quality.THE_720_P
-});
-
-enum Type {
-  BLURAY,
-  WEB
-}
-
-final typeValues = EnumValues({
-  "bluray": Type.BLURAY,
-  "web": Type.WEB
-});
-
-enum VideoCodec {
-  X264
-}
-
-final videoCodecValues = EnumValues({
-  "x264": VideoCodec.X264
-});
 
 class Meta {
   int? serverTime;
