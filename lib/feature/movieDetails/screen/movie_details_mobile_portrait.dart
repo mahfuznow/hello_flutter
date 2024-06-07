@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hello_flutter/base/base_ui_state.dart';
+import 'package:hello_flutter/common/widget/rating_view.dart';
 import 'package:hello_flutter/data/model/movie_details_model.dart';
 import 'package:hello_flutter/feature/movieDetails/movie_details_view_model.dart';
 import 'package:hello_flutter/values/dimens.dart';
@@ -75,7 +76,7 @@ class MovieDetailsUiMobilePortraitState
           SizedBox(height: Dimens.dimen_8),
 
           // Rating
-          _buildRatingStars(movieDetailsModel.rating),
+          RatingView(rating: movieDetailsModel.rating, maxRating: 10),
 
           SizedBox(height: Dimens.dimen_8),
 
@@ -93,26 +94,6 @@ class MovieDetailsUiMobilePortraitState
         ],
       ),
     );
-  }
-
-  // Function to build star icons based on rating
-  Widget _buildRatingStars(double rating) {
-    List<Widget> stars = [];
-    for (int i = 1; i <= 5; i++) {
-      IconData starIcon;
-      if (i * 2 <= rating) {
-        starIcon = Icons.star;
-      } else if (i * 2 > rating && i - rating < 1) {
-        starIcon = Icons.star_half;
-      } else {
-        starIcon = Icons.star_border;
-      }
-      stars.add(Icon(
-        starIcon,
-        color: Colors.amber,
-      ));
-    }
-    return Row(children: stars);
   }
 
   Widget _buildGenres(List<GenreModel> genres) {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hello_flutter/base/base_ui_state.dart';
 import 'package:hello_flutter/common/widget/network_image_view.dart';
+import 'package:hello_flutter/common/widget/rating_view.dart';
 import 'package:hello_flutter/data/model/movie_model.dart';
 import 'package:hello_flutter/feature/home/movie_list/movie_list_view_model.dart';
 import 'package:hello_flutter/values/dimens.dart';
@@ -62,9 +63,11 @@ class MovieListUiMobilePortraitState
               'Release Year: ${movieModel.year}',
               style: textTheme.bodySmall,
             ),
-            Text(
-              'Rating: ${movieModel.rating} / 5',
-              style: textTheme.bodySmall,
+            SizedBox(height: Dimens.dimen_2),
+            RatingView(
+              rating: movieModel.rating,
+              maxRating: 10,
+              color: Theme.of(context).colorScheme.secondary,
             ),
           ],
         ),
