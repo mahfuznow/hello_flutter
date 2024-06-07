@@ -19,8 +19,9 @@ class MovieListViewModel extends BaseViewModel<MovieListArgument> {
   }
 
   void fetchMovies() async {
-    List<MovieModel>? movies = await movieRepository.getMovieList();
-    if(movies != null && movies.isNotEmpty) {
+    List<MovieModel>? movies =
+        await loadData(() => movieRepository.getMovieList());
+    if (movies != null && movies.isNotEmpty) {
       _movies.value = movies;
     }
   }
