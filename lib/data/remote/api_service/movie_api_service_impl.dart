@@ -15,7 +15,7 @@ class MovieApiServiceImpl implements MovieApiService {
   }
 
   @override
-  Future<MovieDetailsResponse> getMovieDetails(int movieId) async {
+  Future<MovieDetailsResponse> getMovieDetails({required String movieId}) async {
     final response = await apiClient.get(
       "/movie_details.json",
       queryParameters: {"movie_id": movieId},

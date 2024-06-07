@@ -17,16 +17,16 @@ class MovieDetailsModel {
     required this.releaseYear,
   });
 
-  factory MovieDetailsModel.fromMovieDetailsResponse(Movie movie) {
+  factory MovieDetailsModel.fromMovieDetailsResponse({required Movie movieDetails}) {
     return MovieDetailsModel(
-      title: movie.title ?? '',
-      fullDescription: movie.descriptionFull ?? '',
-      imageUrl: movie.backgroundImageOriginal ?? '',
-      rating: movie.rating?.toDouble() ?? 0.0,
+      title: movieDetails.title ?? '',
+      fullDescription: movieDetails.descriptionFull ?? '',
+      imageUrl: movieDetails.backgroundImageOriginal ?? '',
+      rating: movieDetails.rating?.toDouble() ?? 0.0,
       genres:
-          movie.genres?.map((e) => GenreModel.fromResponseString(e)).toList() ??
+          movieDetails.genres?.map((e) => GenreModel.fromResponseString(e)).toList() ??
               [],
-      releaseYear: movie.year ?? 0,
+      releaseYear: movieDetails.year ?? 0,
     );
   }
 }

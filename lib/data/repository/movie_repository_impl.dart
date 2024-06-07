@@ -18,9 +18,12 @@ class MovieRepositoryImpl implements MovieRepository {
   }
 
   @override
-  Future<MovieDetailsModel> getMovieDetails({required String movieId}) {
-    // TODO: implement getMovieDetails
-    throw UnimplementedError();
+  Future<MovieDetailsModel?> getMovieDetails({required String movieId}) async {
+    final movieDetailsResponse = await movieApiService.getMovieDetails(movieId: movieId);
+    if(movieDetailsResponse.data?.movie != null) {
+      return MovieDetailsModel.fromMovieDetailsResponse(movieDetails: movieDetailsResponse.data!.movie!);
+    }
+    return null;
   }
 
   @override
