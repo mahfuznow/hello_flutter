@@ -4,6 +4,8 @@ import 'package:hello_flutter/feature/auth/login/route/login_route.dart';
 import 'package:hello_flutter/feature/home/movie_list/route/movie_list_route.dart';
 import 'package:hello_flutter/feature/home/route/home_argument.dart';
 import 'package:hello_flutter/feature/home/route/home_route.dart';
+import 'package:hello_flutter/feature/movieDetails/route/movie_details_argument.dart';
+import 'package:hello_flutter/feature/movieDetails/route/movie_details_route.dart';
 import 'package:hello_flutter/navigation/unknown_page_route.dart';
 
 enum RoutePath {
@@ -66,6 +68,8 @@ enum RoutePath {
         return HomeRoute(arguments: arguments as HomeArgument);
         case RoutePath.movieList:
         return MovieListRoute(arguments: arguments);
+      case RoutePath.movieDetails:
+        return MovieDetailsRoute(arguments: arguments as MovieDetailsArgument);
       default:
         return UnknownRoute(arguments: arguments);
     }

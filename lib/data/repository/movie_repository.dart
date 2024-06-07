@@ -4,7 +4,7 @@ import 'package:hello_flutter/data/model/movie_details_model.dart';
 abstract class MovieRepository {
   Future<List<MovieModel>?> getMovieList();
 
-  Future<MovieDetailsModel> getMovieDetails(int movieId);
+  Future<MovieDetailsModel> getMovieDetails({required String movieId});
 
-  Future<List<MovieModel>> searchMovies(String query);
+  Future<List<MovieModel>> searchMovies({required String query});
 }

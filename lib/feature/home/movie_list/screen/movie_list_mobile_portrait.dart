@@ -25,7 +25,7 @@ class MovieListUiMobilePortraitState
             itemCount: value.length,
             itemBuilder: (context, index) {
               final movie = value[index];
-              return buildMovieListItem(movieModel: movie);
+              return _movieListView(movieModel: movie);
             },
           );
         },
@@ -33,7 +33,7 @@ class MovieListUiMobilePortraitState
     );
   }
 
-  Widget buildMovieListItem({
+  Widget _movieListView({
     required MovieModel movieModel,
   }) {
     TextTheme textTheme = Theme.of(context).textTheme;
@@ -67,7 +67,7 @@ class MovieListUiMobilePortraitState
           ],
         ),
         onTap: () {
-          // Handle onTap if needed
+          widget.viewModel.onMovieItemClicked(movieModel);
         },
       ),
     );

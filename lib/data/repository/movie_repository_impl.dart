@@ -12,17 +12,19 @@ class MovieRepositoryImpl implements MovieRepository {
   @override
   Future<List<MovieModel>?> getMovieList() async {
     final movieListResponse = await movieApiService.getMovies();
-    return movieListResponse.data?.movies?.map((e) => MovieModel.fromResponseMovie(e)).toList();
+    return movieListResponse.data?.movies
+        ?.map((e) => MovieModel.fromResponseMovie(e))
+        .toList();
   }
 
   @override
-  Future<MovieDetailsModel> getMovieDetails(int movieId) {
+  Future<MovieDetailsModel> getMovieDetails({required String movieId}) {
     // TODO: implement getMovieDetails
     throw UnimplementedError();
   }
 
   @override
-  Future<List<MovieModel>> searchMovies(String query) {
+  Future<List<MovieModel>> searchMovies({required String query}) {
     // TODO: implement searchMovies
     throw UnimplementedError();
   }
