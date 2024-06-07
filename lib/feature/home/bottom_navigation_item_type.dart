@@ -37,8 +37,12 @@ enum NavigationItemType {
     switch (this) {
       case NavigationItemType.movieList:
         return const MovieListAdaptiveUi();
-      default:
-        return const Center(child: Text('Under Construction'));
+      case NavigationItemType.movieSearch:
+        return const Center(child: Text('Search'));
+      case NavigationItemType.movieBookmark:
+        return const Center(child: Text('Bookmark'));
+      case NavigationItemType.settings:
+        return const Center(child: Text('Settings'));
     }
   }
 

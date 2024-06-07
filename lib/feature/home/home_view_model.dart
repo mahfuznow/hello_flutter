@@ -36,7 +36,7 @@ class HomeViewModel extends BaseViewModel<HomeArgument> {
   }
 
   void onNavigationItemClicked(int index) {
-
+    _currentPageIndex.value = index;
   }
 
   onClickBack() {

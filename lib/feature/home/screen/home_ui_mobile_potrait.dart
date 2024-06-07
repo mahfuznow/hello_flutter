@@ -19,6 +19,8 @@ class HomeUiMobilePortrait extends StatefulWidget {
 }
 
 class HomeUiMobilePortraitState extends BaseUiState<HomeUiMobilePortrait> {
+  final PageController _pageController = PageController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,6 +40,7 @@ class HomeUiMobilePortraitState extends BaseUiState<HomeUiMobilePortrait> {
 
   Widget _homeBody(BuildContext context) {
     return PageView(
+      controller: _pageController,
       onPageChanged: (index) => widget.viewModel.onPageChanged(index),
       physics: const NeverScrollableScrollPhysics(),
       children: widget.viewModel.navigationItems.map((e) => e.page).toList(),
@@ -52,8 +55,10 @@ class HomeUiMobilePortraitState extends BaseUiState<HomeUiMobilePortrait> {
           elevation: Dimens.dimen_10,
           surfaceTintColor: Theme.of(context).colorScheme.primary,
           selectedIndex: value,
-          onDestinationSelected: (index) =>
-              widget.viewModel.onNavigationItemClicked(index),
+          onDestinationSelected: (index) {
+            _pageController.jumpToPage(index);
+            widget.viewModel.onNavigationItemClicked(index);
+          },
           destinations: widget.viewModel.navigationItems
               .map(
                 (e) => NavigationDestination(
