@@ -6,7 +6,11 @@ class MovieApiClient extends ApiClient {
   String get baseUrl => "https://yts.mx/api/v2";
 
   @override
-  get bearerToken async => {
-    (await AppUserSession.example.getFromSharedPref() as AppUserSession).accessToken
-  };
+  Future<Map<String, String>> getCustomHeader()  async {
+    final accessToken = (await AppUserSession.example.getFromSharedPref() as AppUserSession).accessToken;
+    return {
+      'Authorization': 'Bearer $accessToken',
+      'Content-Type': 'application/json',
+    };
+  }
 }
