@@ -24,18 +24,19 @@ class MovieDetailsAdaptiveUiState extends BaseAdaptiveUiState<
   @override
   MovieDetailsViewModel viewModel = MovieDetailsViewModel(
     movieRepository: MovieRepositoryImpl(
-        movieApiService: MovieApiServiceImpl(
-      apiClient: MovieApiClient(),
-    )),
+      movieApiService: MovieApiServiceImpl(
+        apiClient: MovieApiClient(),
+      ),
+    ),
   );
-
-  @override
-  StatefulWidget mobileLandscapeContents(BuildContext context) {
-    return MovieDetailsUiMobileLandscape(viewModel: viewModel);
-  }
 
   @override
   StatefulWidget mobilePortraitContents(BuildContext context) {
     return MovieDetailsUiMobilePortrait(viewModel: viewModel);
+  }
+
+  @override
+  StatefulWidget mobileLandscapeContents(BuildContext context) {
+    return MovieDetailsUiMobileLandscape(viewModel: viewModel);
   }
 }

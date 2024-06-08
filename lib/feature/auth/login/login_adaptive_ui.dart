@@ -21,12 +21,12 @@ class LoginAdaptiveUiState extends BaseAdaptiveUiState<LoginArgument,
   );
 
   @override
-  StatefulWidget mobileLandscapeContents(BuildContext context) {
-    return LoginUiMobileLandscape(viewModel: viewModel);
+  StatefulWidget mobilePortraitContents(BuildContext context) {
+    return LoginUiMobilePortrait(viewModel: viewModel);
   }
 
   @override
-  StatefulWidget mobilePortraitContents(BuildContext context) {
-    return LoginUiMobilePortrait(viewModel: viewModel);
+  StatefulWidget mobileLandscapeContents(BuildContext context) {
+    return LoginUiMobileLandscape(viewModel: viewModel);
   }
 }
