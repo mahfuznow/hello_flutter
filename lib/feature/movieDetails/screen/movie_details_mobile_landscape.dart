@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hello_flutter/feature/home/movie_list/screen/movie_list_mobile_portrait.dart';
 import 'package:hello_flutter/feature/movieDetails/screen/movie_details_mobile_portrait.dart';
 
 class MovieDetailsUiMobileLandscape extends MovieDetailsUiMobilePortrait {
@@ -9,5 +8,4 @@ class MovieDetailsUiMobileLandscape extends MovieDetailsUiMobilePortrait {
   State<StatefulWidget> createState() => MovieDetailsUiMobileLandscapeState();
 }
 
-class MovieDetailsUiMobileLandscapeState
-    extends MovieListUiMobilePortraitState {}
+class MovieDetailsUiMobileLandscapeState extends MovieDetailsUiMobilePortraitState {}
