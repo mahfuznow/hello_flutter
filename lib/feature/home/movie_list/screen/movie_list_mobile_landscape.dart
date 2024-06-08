@@ -40,42 +40,45 @@ class MovieListUiMobileLandscapeState extends MovieListUiMobilePortraitState {
     required MovieModel movieModel,
   }) {
     TextTheme textTheme = Theme.of(context).textTheme;
-    return Card(
-      clipBehavior: Clip.antiAlias,
-      elevation: Dimens.dimen_1,
-      margin: EdgeInsets.all(Dimens.dimen_8),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          NetworkImageView(
-            url: movieModel.poster,
-            height: Dimens.dimen_150,
-            fit: BoxFit.cover,
-          ),
-          Text(
-            movieModel.title,
-            style: textTheme.titleMedium,
-          ),
-          Padding(
-            padding: EdgeInsets.all(Dimens.dimen_8),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  '${movieModel.year}',
-                  style: textTheme.labelMedium,
-                ),
-                SizedBox(height: Dimens.dimen_2),
-                RatingView(
-                  rating: movieModel.rating,
-                  maxRating: 10,
-                  color: Theme.of(context).colorScheme.secondary,
-                ),
-              ],
+    return InkWell(
+      onTap: () => widget.viewModel.onMovieItemClicked(movieModel),
+      child: Card(
+        clipBehavior: Clip.antiAlias,
+        elevation: Dimens.dimen_1,
+        margin: EdgeInsets.all(Dimens.dimen_8),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            NetworkImageView(
+              url: movieModel.poster,
+              height: Dimens.dimen_150,
+              fit: BoxFit.cover,
             ),
-          )
-        ],
+            Text(
+              movieModel.title,
+              style: textTheme.titleMedium,
+            ),
+            Padding(
+              padding: EdgeInsets.all(Dimens.dimen_8),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    '${movieModel.year}',
+                    style: textTheme.labelMedium,
+                  ),
+                  SizedBox(height: Dimens.dimen_2),
+                  RatingView(
+                    rating: movieModel.rating,
+                    maxRating: 10,
+                    color: Theme.of(context).colorScheme.secondary,
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
