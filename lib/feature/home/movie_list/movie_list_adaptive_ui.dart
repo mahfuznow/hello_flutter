@@ -18,13 +18,7 @@ class MovieListAdaptiveUi extends BaseAdaptiveUi<MovieListArgument> {
 class MovieListAdaptiveUiState extends BaseAdaptiveUiState<MovieListArgument,
     MovieListAdaptiveUi, MovieListViewModel> {
   @override
-  MovieListViewModel viewModel = MovieListViewModel(
-    movieRepository: MovieRepositoryImpl(
-      movieApiService: MovieApiServiceImpl(
-        apiClient: MovieApiClient(),
-      ),
-    ),
-  );
+  MovieListViewModel viewModel = MovieListViewModel.singleton;
 
   @override
   StatefulWidget mobilePortraitContents(BuildContext context) {
