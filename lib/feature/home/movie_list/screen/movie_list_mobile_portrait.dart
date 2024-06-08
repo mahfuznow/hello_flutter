@@ -27,7 +27,7 @@ class MovieListUiMobilePortraitState
             itemCount: value.length,
             itemBuilder: (context, index) {
               final movie = value[index];
-              return _movieListView(movieModel: movie);
+              return _movieListItemView(movieModel: movie);
             },
           );
         },
@@ -35,12 +35,12 @@ class MovieListUiMobilePortraitState
     );
   }
 
-  Widget _movieListView({
+  Widget _movieListItemView({
     required MovieModel movieModel,
   }) {
     TextTheme textTheme = Theme.of(context).textTheme;
     return Card(
-      elevation: Dimens.dimen_3,
+      elevation: Dimens.dimen_1,
       margin: EdgeInsets.all(Dimens.dimen_8),
       child: ListTile(
         contentPadding: EdgeInsets.symmetric(
@@ -60,8 +60,8 @@ class MovieListUiMobilePortraitState
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Release Year: ${movieModel.year}',
-              style: textTheme.bodySmall,
+              '${movieModel.year}',
+              style: textTheme.labelMedium,
             ),
             SizedBox(height: Dimens.dimen_2),
             RatingView(
