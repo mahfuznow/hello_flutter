@@ -4,7 +4,7 @@ import 'package:hello_flutter/feature/movieDetails/movie_details_adaptive_ui.dar
 import 'package:hello_flutter/feature/movieDetails/route/movie_details_argument.dart';
 import 'package:hello_flutter/navigation/route_path.dart';
 
-class MovieDetailsRoute extends BaseRoute {
+class MovieDetailsRoute extends BaseRoute<MovieDetailsArgument> {
   @override
   RoutePath routePath = RoutePath.movieDetails;
 
@@ -12,6 +12,6 @@ class MovieDetailsRoute extends BaseRoute {
 
   @override
   MaterialPageRoute toMaterialPageRoute() {
-    return MaterialPageRoute(builder: (_) => MovieDetailsAdaptiveUi(argument: arguments as MovieDetailsArgument));
+    return MaterialPageRoute(builder: (_) => MovieDetailsAdaptiveUi(argument: arguments));
   }
 }

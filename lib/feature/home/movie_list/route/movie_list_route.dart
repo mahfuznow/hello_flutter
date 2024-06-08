@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hello_flutter/base/base_route.dart';
 import 'package:hello_flutter/feature/home/movie_list/movie_list_adaptive_ui.dart';
+import 'package:hello_flutter/feature/home/movie_list/route/movie_list_argument.dart';
 import 'package:hello_flutter/navigation/route_path.dart';
 
-class MovieListRoute extends BaseRoute {
+class MovieListRoute extends BaseRoute<MovieListArgument> {
   @override
   RoutePath routePath = RoutePath.movieList;
 

@@ -5,10 +5,12 @@ import 'package:hello_flutter/data/remote/api_service/movie_api_service_impl.dar
 import 'package:hello_flutter/data/repository/movie_repository_impl.dart';
 import 'package:hello_flutter/feature/home/movie_list/movie_list_view_model.dart';
 import 'package:hello_flutter/feature/home/movie_list/route/movie_list_argument.dart';
+import 'package:hello_flutter/feature/home/movie_list/route/movie_list_route.dart';
 import 'package:hello_flutter/feature/home/movie_list/screen/movie_list_mobile_landscape.dart';
 import 'package:hello_flutter/feature/home/movie_list/screen/movie_list_mobile_portrait.dart';
 
-class MovieListAdaptiveUi extends BaseAdaptiveUi<MovieListArgument> {
+class MovieListAdaptiveUi
+    extends BaseAdaptiveUi<MovieListArgument, MovieListRoute> {
   const MovieListAdaptiveUi({super.key});
 
   @override
@@ -16,7 +18,7 @@ class MovieListAdaptiveUi extends BaseAdaptiveUi<MovieListArgument> {
 }
 
 class MovieListAdaptiveUiState extends BaseAdaptiveUiState<MovieListArgument,
-    MovieListAdaptiveUi, MovieListViewModel> {
+    MovieListRoute, MovieListAdaptiveUi, MovieListViewModel> {
   @override
   MovieListViewModel viewModel = MovieListViewModel.singleton;
 

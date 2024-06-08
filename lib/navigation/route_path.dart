@@ -1,6 +1,8 @@
 import 'package:hello_flutter/base/base_argument.dart';
 import 'package:hello_flutter/base/base_route.dart';
+import 'package:hello_flutter/feature/auth/login/route/login_argument.dart';
 import 'package:hello_flutter/feature/auth/login/route/login_route.dart';
+import 'package:hello_flutter/feature/home/movie_list/route/movie_list_argument.dart';
 import 'package:hello_flutter/feature/home/movie_list/route/movie_list_route.dart';
 import 'package:hello_flutter/feature/home/route/home_argument.dart';
 import 'package:hello_flutter/feature/home/route/home_route.dart';
@@ -63,15 +65,27 @@ enum RoutePath {
   BaseRoute getAppRoute({BaseArgument? arguments}) {
     switch (this) {
       case RoutePath.login:
-        return LoginRoute(arguments: arguments);
+        return LoginRoute(
+          arguments: arguments as LoginArgument?,
+        );
       case RoutePath.home:
-        return HomeRoute(arguments: arguments as HomeArgument);
-        case RoutePath.movieList:
+        if (arguments is! HomeArgument) {
+          throw Exception('HomeArgument is required');
+        }
+        return HomeRoute(arguments: arguments);
+      case RoutePath.movieList:
+        if (arguments is! MovieListArgument) {
+          throw Exception('MovieListArgument is required');
+        }
         return MovieListRoute(arguments: arguments);
       case RoutePath.movieDetails:
-        return MovieDetailsRoute(arguments: arguments as MovieDetailsArgument);
+        if (arguments is! MovieDetailsArgument) {
+          throw Exception('MovieDetailsArgument is required');
+        }
+        return MovieDetailsRoute(arguments: arguments);
       default:
         return UnknownRoute(arguments: arguments);
     }
   }
+
 }

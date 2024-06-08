@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:hello_flutter/base/base_argument.dart';
 import 'package:hello_flutter/navigation/route_path.dart';
 
-abstract class BaseRoute {
+abstract class BaseRoute<A extends BaseArgument> {
   abstract RoutePath routePath;
-  BaseArgument? arguments;
+  A? arguments;
 
   BaseRoute({this.arguments});
 

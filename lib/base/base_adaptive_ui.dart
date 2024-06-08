@@ -13,7 +13,7 @@ import 'package:hello_flutter/navigation/app_router.dart';
 import 'package:hello_flutter/util/app_logger.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-abstract class BaseAdaptiveUi<A extends BaseArgument> extends StatefulWidget {
+abstract class BaseAdaptiveUi<A extends BaseArgument, R extends BaseRoute<A>> extends StatefulWidget {
   final A? argument;
 
   const BaseAdaptiveUi({this.argument, super.key});
@@ -21,7 +21,8 @@ abstract class BaseAdaptiveUi<A extends BaseArgument> extends StatefulWidget {
 
 abstract class BaseAdaptiveUiState<
     A extends BaseArgument,
-    W extends BaseAdaptiveUi<A>,
+    R extends BaseRoute<A>,
+    W extends BaseAdaptiveUi<A,R>,
     V extends BaseViewModel<A>> extends BaseUiState<W> {
   abstract V viewModel;
 

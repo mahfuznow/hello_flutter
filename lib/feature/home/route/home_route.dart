@@ -4,7 +4,7 @@ import 'package:hello_flutter/feature/home/home_adaptive_ui.dart';
 import 'package:hello_flutter/feature/home/route/home_argument.dart';
 import 'package:hello_flutter/navigation/route_path.dart';
 
-class HomeRoute extends BaseRoute {
+class HomeRoute extends BaseRoute<HomeArgument> {
   @override
   RoutePath routePath = RoutePath.home;
 
