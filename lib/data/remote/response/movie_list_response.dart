@@ -9,27 +9,23 @@ MovieListResponse movieListResponseFromJson(String str) => MovieListResponse.fro
 String movieListResponseToJson(MovieListResponse data) => json.encode(data.toJson());
 
 class MovieListResponse {
-  Stat? status;
   String? statusMessage;
   Data? data;
   Meta? meta;
 
   MovieListResponse({
-    this.status,
     this.statusMessage,
     this.data,
     this.meta,
   });
 
   factory MovieListResponse.fromJson(Map<String, dynamic> json) => MovieListResponse(
-    status: statValues.map[json["status"]]!,
     statusMessage: json["status_message"],
     data: json["data"] == null ? null : Data.fromJson(json["data"]),
     meta: json["@meta"] == null ? null : Meta.fromJson(json["@meta"]),
   );
 
   Map<String, dynamic> toJson() => {
-    "status": statValues.reverse[status],
     "status_message": statusMessage,
     "data": data?.toJson(),
     "@meta": meta?.toJson(),
@@ -81,14 +77,11 @@ class Movie {
   String? synopsis;
   String? ytTrailerCode;
   String? language;
-  MpaRating? mpaRating;
   String? backgroundImage;
   String? backgroundImageOriginal;
   String? smallCoverImage;
   String? mediumCoverImage;
   String? largeCoverImage;
-  Stat? state;
-  List<Torrent>? torrents;
   DateTime? dateUploaded;
   int? dateUploadedUnix;
 
@@ -109,14 +102,11 @@ class Movie {
     this.synopsis,
     this.ytTrailerCode,
     this.language,
-    this.mpaRating,
     this.backgroundImage,
     this.backgroundImageOriginal,
     this.smallCoverImage,
     this.mediumCoverImage,
     this.largeCoverImage,
-    this.state,
-    this.torrents,
     this.dateUploaded,
     this.dateUploadedUnix,
   });
@@ -138,14 +128,11 @@ class Movie {
     synopsis: json["synopsis"],
     ytTrailerCode: json["yt_trailer_code"],
     language: json["language"],
-    mpaRating: mpaRatingValues.map[json["mpa_rating"]]!,
     backgroundImage: json["background_image"],
     backgroundImageOriginal: json["background_image_original"],
     smallCoverImage: json["small_cover_image"],
     mediumCoverImage: json["medium_cover_image"],
     largeCoverImage: json["large_cover_image"],
-    state: statValues.map[json["state"]]!,
-    torrents: json["torrents"] == null ? [] : List<Torrent>.from(json["torrents"]!.map((x) => Torrent.fromJson(x))),
     dateUploaded: json["date_uploaded"] == null ? null : DateTime.parse(json["date_uploaded"]),
     dateUploadedUnix: json["date_uploaded_unix"],
   );
@@ -167,97 +154,15 @@ class Movie {
     "synopsis": synopsis,
     "yt_trailer_code": ytTrailerCode,
     "language": language,
-    "mpa_rating": mpaRatingValues.reverse[mpaRating],
     "background_image": backgroundImage,
     "background_image_original": backgroundImageOriginal,
     "small_cover_image": smallCoverImage,
     "medium_cover_image": mediumCoverImage,
     "large_cover_image": largeCoverImage,
-    "state": statValues.reverse[state],
-    "torrents": torrents == null ? [] : List<dynamic>.from(torrents!.map((x) => x.toJson())),
     "date_uploaded": dateUploaded?.toIso8601String(),
     "date_uploaded_unix": dateUploadedUnix,
   };
 }
-
-enum MpaRating {
-  EMPTY,
-  PG_13,
-  R
-}
-
-final mpaRatingValues = EnumValues({
-  "": MpaRating.EMPTY,
-  "PG-13": MpaRating.PG_13,
-  "R": MpaRating.R
-});
-
-enum Stat {
-  OK
-}
-
-final statValues = EnumValues({
-  "ok": Stat.OK
-});
-
-class Torrent {
-  String? url;
-  String? hash;
-  Type? type;
-  String? isRepack;
-  String? bitDepth;
-  String? audioChannels;
-  int? seeds;
-  int? peers;
-  String? size;
-  int? sizeBytes;
-  DateTime? dateUploaded;
-  int? dateUploadedUnix;
-
-  Torrent({
-    this.url,
-    this.hash,
-    this.type,
-    this.isRepack,
-    this.bitDepth,
-    this.audioChannels,
-    this.seeds,
-    this.peers,
-    this.size,
-    this.sizeBytes,
-    this.dateUploaded,
-    this.dateUploadedUnix,
-  });
-
-  factory Torrent.fromJson(Map<String, dynamic> json) => Torrent(
-    url: json["url"],
-    hash: json["hash"],
-    isRepack: json["is_repack"],
-    bitDepth: json["bit_depth"],
-    audioChannels: json["audio_channels"],
-    seeds: json["seeds"],
-    peers: json["peers"],
-    size: json["size"],
-    sizeBytes: json["size_bytes"],
-    dateUploaded: json["date_uploaded"] == null ? null : DateTime.parse(json["date_uploaded"]),
-    dateUploadedUnix: json["date_uploaded_unix"],
-  );
-
-  Map<String, dynamic> toJson() => {
-    "url": url,
-    "hash": hash,
-    "is_repack": isRepack,
-    "bit_depth": bitDepth,
-    "audio_channels": audioChannels,
-    "seeds": seeds,
-    "peers": peers,
-    "size": size,
-    "size_bytes": sizeBytes,
-    "date_uploaded": dateUploaded?.toIso8601String(),
-    "date_uploaded_unix": dateUploadedUnix,
-  };
-}
-
 class Meta {
   int? serverTime;
   String? serverTimezone;
