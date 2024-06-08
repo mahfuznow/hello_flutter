@@ -5,8 +5,10 @@ import 'package:hello_flutter/base/base_argument.dart';
 import 'package:hello_flutter/base/base_exception.dart';
 import 'package:hello_flutter/base/base_route.dart';
 import 'package:hello_flutter/base/base_state.dart';
+import 'package:hello_flutter/localization/text_id.dart';
 import 'package:hello_flutter/localization/ui_text.dart';
 import 'package:hello_flutter/util/app_logger.dart';
+import 'package:http/http.dart';
 
 abstract class BaseViewModel<A extends BaseArgument> {
   bool isLoading = false;
@@ -93,12 +95,17 @@ abstract class BaseViewModel<A extends BaseArgument> {
         baseError: e,
         shouldShowToast: shouldShowToast,
       );
-      AppLogger.e("BaseViewModel: Load Data Error: $e");
+      AppLogger.e("BaseViewModel: BaseException: Load Data Error: $e");
       return Future.error(e);
     } on Error catch (e) {
-      AppLogger.e("BaseViewModel: Load Data Error: $e");
+      AppLogger.e("BaseViewModel: Error: Load Data Error: $e");
       return Future.error(e);
-    } on Exception catch (e) {
+    } on ClientException catch (e) {
+      showToast(uiText: DynamicUiText(textId: PleaseCheckYourInternetConnection(), fallbackText: "Please check your internet connection"));
+      AppLogger.e("BaseViewModel: ClientException Load Data Error: $e");
+      return Future.error(e);
+    }
+    on Exception catch (e) {
       AppLogger.e("BaseViewModel: Load Data Error: $e");
       return Future.error(e);
     } finally {

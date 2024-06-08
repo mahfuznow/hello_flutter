@@ -35,3 +35,10 @@ class PleaseFillUpAllTheRequiredFieldsTextId extends TextId {
     return localizations.error_please_fill_up_all_fields;
   }
 }
+
+class PleaseCheckYourInternetConnection extends TextId {
+  @override
+  String getLocalizedText(AppLocalizations localizations) {
+    return localizations.error_massage__please_check_your_internet_connection;
+  }
+}

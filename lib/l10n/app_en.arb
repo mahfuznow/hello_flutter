@@ -103,5 +103,9 @@
   "login__title_text": "Login",
   "@login__title_text": {
     "type": "text"
+  },
+  "error_massage__please_check_your_internet_connection": "Please check your internet connection",
+  "@error_massage__please_check_your_internet_connection": {
+      "type": "text"
   }
 }
