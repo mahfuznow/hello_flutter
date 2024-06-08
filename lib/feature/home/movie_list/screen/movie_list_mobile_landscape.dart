@@ -21,8 +21,8 @@ class MovieListUiMobileLandscapeState extends MovieListUiMobilePortraitState {
         builder: (context, value) {
           return GridView.builder(
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              childAspectRatio: 3 / 2, //width / height
+              crossAxisCount: 4,
+              childAspectRatio: 3/4, //width / height
             ),
             itemCount: value.length,
             itemBuilder: (context, index) {
@@ -57,6 +57,7 @@ class MovieListUiMobileLandscapeState extends MovieListUiMobilePortraitState {
             Text(
               movieModel.title,
               style: textTheme.titleMedium,
+              maxLines: 1,
             ),
             Padding(
               padding: EdgeInsets.all(Dimens.dimen_8),
@@ -67,6 +68,7 @@ class MovieListUiMobileLandscapeState extends MovieListUiMobilePortraitState {
                   Text(
                     '${movieModel.year}',
                     style: textTheme.labelMedium,
+                    maxLines: 1,
                   ),
                   SizedBox(height: Dimens.dimen_2),
                   RatingView(
