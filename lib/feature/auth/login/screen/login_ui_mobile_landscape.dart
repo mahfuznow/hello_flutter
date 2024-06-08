@@ -19,7 +19,7 @@ class LoginUiMobileLandscapeState extends LoginUiMobilePortraitState {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Image.asset(
-          "assets/images/ferdia_logo.png",
+          "assets/images/app_logo.png",
           width: Dimens.dimen_50,
           height: Dimens.dimen_50,
         ),
