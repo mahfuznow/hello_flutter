@@ -1,6 +1,7 @@
 # A starter template for Flutter Projects.
 
 ## Includes:
+- Dynamic layouts based on device type (Mobile/Tab) and orientation (Portrait/Landscape).
 - MVVM Architecture with Base Setup
 - ValueNotifier for state management
 - Network Calls with http
