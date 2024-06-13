@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hello_flutter/base/base_ui_state.dart';
+import 'package:hello_flutter/common/widget/network_image_view.dart';
 import 'package:hello_flutter/common/widget/rating_view.dart';
 import 'package:hello_flutter/data/model/movie_details_model.dart';
 import 'package:hello_flutter/feature/movieDetails/movie_details_view_model.dart';
@@ -45,10 +46,10 @@ class MovieDetailsUiMobilePortraitState
   }
 
   Widget _buildMoviePoster(String imageUrl) {
-    return Image.network(
-      imageUrl,
+    return NetworkImageView(
+      url: imageUrl,
+      height: Dimens.dimen_250,
       fit: BoxFit.cover,
-      height: 250,
     );
   }
 

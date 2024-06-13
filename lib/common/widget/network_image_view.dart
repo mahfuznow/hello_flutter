@@ -31,14 +31,28 @@ class NetworkImageView extends StatelessWidget {
         frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
           return frame == null ? placeholder ?? _placeholder() : child;
         },
+        errorBuilder: (context, error, stackTrace) {
+          return placeholder ?? _errorPlaceholder();
+        }
       ),
     );
   }
 
   Widget _placeholder() {
-    return Padding(
+    return Container(
+      height: height,
+      width: width,
       padding: EdgeInsets.all(Dimens.dimen_8),
-      child: const CircularProgressIndicator(),
+      child: const Center(child: CircularProgressIndicator()),
+    );
+  }
+
+  Widget _errorPlaceholder() {
+    return Container(
+      height: height,
+      width: width,
+      padding: EdgeInsets.all(Dimens.dimen_8),
+      child: const Icon(Icons.error),
     );
   }
 }
