@@ -8,6 +8,7 @@ import 'package:hello_flutter/data/repository/movie_repository_impl.dart';
 import 'package:hello_flutter/feature/home/movie_list/route/movie_list_argument.dart';
 import 'package:hello_flutter/feature/movieDetails/route/movie_details_argument.dart';
 import 'package:hello_flutter/feature/movieDetails/route/movie_details_route.dart';
+import 'package:hello_flutter/util/value_notifier_list.dart';
 
 class MovieListViewModel extends BaseViewModel<MovieListArgument> {
 
@@ -21,7 +22,7 @@ class MovieListViewModel extends BaseViewModel<MovieListArgument> {
 
   final MovieRepository movieRepository;
 
-  final ValueNotifier<List<MovieModel>> _movies = ValueNotifier([]);
+  final ValueNotifierList<MovieModel> _movies = ValueNotifierList([]);
 
   ValueListenable<List<MovieModel>> get movies => _movies;
 
@@ -48,6 +49,13 @@ class MovieListViewModel extends BaseViewModel<MovieListArgument> {
       destination: MovieDetailsRoute(
         arguments: MovieDetailsArgument(movieId: movie.movieId),
       ),
+    );
+  }
+
+  void onClickedFavorite(MovieModel movie) {
+    _movies.updateItem(
+      movie,
+      movie.copyWith(isFavorite: !movie.isFavorite),
     );
   }
 }

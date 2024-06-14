@@ -56,19 +56,32 @@ class MovieListUiMobilePortraitState
           movieModel.title,
           style: textTheme.titleMedium,
         ),
-        subtitle: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        subtitle: Row(
           children: [
-            Text(
-              '${movieModel.year}',
-              style: textTheme.labelMedium,
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  '${movieModel.year}',
+                  style: textTheme.labelMedium,
+                ),
+                SizedBox(height: Dimens.dimen_2),
+                RatingView(
+                  rating: movieModel.rating,
+                  maxRating: 10,
+                  color: Theme.of(context).colorScheme.secondary,
+                ),
+              ],
             ),
-            SizedBox(height: Dimens.dimen_2),
-            RatingView(
-              rating: movieModel.rating,
-              maxRating: 10,
-              color: Theme.of(context).colorScheme.secondary,
-            ),
+            const Spacer(),
+            IconButton(
+                onPressed: () {
+                  widget.viewModel.onClickedFavorite(movieModel);
+                },
+                icon:  Icon(movieModel.isFavorite
+                    ? Icons.favorite
+                    : Icons.favorite_border)
+            )
           ],
         ),
         onTap: () {
