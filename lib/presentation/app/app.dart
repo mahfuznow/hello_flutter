@@ -1,9 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hello_flutter/presentation/app/app_viewmodel.dart';
 import 'package:hello_flutter/presentation/base/screen_util/screen_util_builder.dart';
+import 'package:hello_flutter/presentation/localization/generated/app_localizations.dart';
 import 'package:hello_flutter/presentation/navigation/app_router.dart';
 import 'package:hello_flutter/presentation/theme/dark_app_theme.dart';
 import 'package:hello_flutter/presentation/theme/light_app_theme.dart';

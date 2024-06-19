@@ -1,4 +1,4 @@
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:hello_flutter/presentation/localization/generated/app_localizations.dart';
 import 'package:hello_flutter/presentation/localization/text_id.dart';
 
 abstract class UiText {

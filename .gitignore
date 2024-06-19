@@ -139,3 +139,5 @@ app.*.symbols
 !.vscode/settings.json
 
 env/.env.*
+
+lib/presentation/localization/generated/*

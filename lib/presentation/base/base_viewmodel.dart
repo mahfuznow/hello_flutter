@@ -102,9 +102,11 @@ abstract class BaseViewModel<A extends BaseArgument> {
       return Future.error(e);
     } on ClientException catch (e) {
       showToast(
-          uiText: DynamicUiText(
-              textId: PleaseCheckYourInternetConnection(),
-              fallbackText: "Please check your internet connection"));
+        uiText: DynamicUiText(
+          textId: PleaseCheckYourInternetConnection(),
+          fallbackText: "Please check your internet connection",
+        ),
+      );
       AppLogger.e("BaseViewModel: ClientException Load Data Error: $e");
       return Future.error(e);
     } on Exception catch (e) {
