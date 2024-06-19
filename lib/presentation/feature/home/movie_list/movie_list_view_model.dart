@@ -8,7 +8,7 @@ import 'package:hello_flutter/presentation/base/base_viewmodel.dart';
 import 'package:hello_flutter/presentation/feature/home/movie_list/route/movie_list_argument.dart';
 import 'package:hello_flutter/presentation/feature/movieDetails/route/movie_details_argument.dart';
 import 'package:hello_flutter/presentation/feature/movieDetails/route/movie_details_route.dart';
-import 'package:hello_flutter/util/value_notifier_list.dart';
+import 'package:hello_flutter/presentation/util/value_notifier_list.dart';
 
 class MovieListViewModel extends BaseViewModel<MovieListArgument> {
   static MovieListViewModel singleton = MovieListViewModel(
