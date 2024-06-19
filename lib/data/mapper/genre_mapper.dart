@@ -45,4 +45,47 @@ class GenreMapper {
         return Genre.action;
     }
   }
+
+  static String mapDomainToRequest(Genre genre) {
+    switch (genre) {
+      case Genre.action:
+        return 'Action';
+      case Genre.adventure:
+        return 'Adventure';
+      case Genre.animation:
+        return 'Animation';
+      case Genre.biography:
+        return 'Biography';
+      case Genre.comedy:
+        return 'Comedy';
+      case Genre.crime:
+        return 'Crime';
+      case Genre.drama:
+        return 'Drama';
+      case Genre.family:
+        return 'Family';
+      case Genre.fantasy:
+        return 'Fantasy';
+      case Genre.history:
+        return 'History';
+      case Genre.horror:
+        return 'Horror';
+      case Genre.music:
+        return 'Music';
+      case Genre.mystery:
+        return 'Mystery';
+      case Genre.romance:
+        return 'Romance';
+      case Genre.sciFi:
+        return 'Sci-Fi';
+      case Genre.sport:
+        return 'Sport';
+      case Genre.thriller:
+        return 'Thriller';
+      case Genre.war:
+        return 'War';
+      case Genre.western:
+        return 'Western';
+    }
+  }
 }

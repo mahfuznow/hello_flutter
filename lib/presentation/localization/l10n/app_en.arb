@@ -106,6 +106,26 @@
   },
   "error_massage__please_check_your_internet_connection": "Please check your internet connection",
   "@error_massage__please_check_your_internet_connection": {
-      "type": "text"
+    "type": "text"
+  },
+  "genre__action": "Action",
+  "@genre__action": {
+    "type": "text"
+  },
+  "genre__adventure": "Adventure",
+  "@genre__adventure": {
+    "type": "text"
+  },
+  "genre__animation": "Animation",
+  "@genre__animation": {
+    "type": "text"
+  },
+  "genre__sci_fi": "Sci-Fi",
+  "@genre__sci_fi": {
+    "type": "text"
+  },
+  "genre__thriller": "Thriller",
+  "@genre__thriller": {
+    "type": "text"
   }
 }

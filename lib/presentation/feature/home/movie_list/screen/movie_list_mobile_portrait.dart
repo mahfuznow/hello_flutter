@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hello_flutter/domain/entity/movie.dart';
 import 'package:hello_flutter/presentation/base/base_ui_state.dart';
+import 'package:hello_flutter/presentation/common/extension/context_ext.dart';
 import 'package:hello_flutter/presentation/common/widget/network_image_view.dart';
 import 'package:hello_flutter/presentation/common/widget/rating_view.dart';
 import 'package:hello_flutter/presentation/feature/home/movie_list/movie_list_view_model.dart';
+import 'package:hello_flutter/presentation/localization/extension/genre_localization_ext.dart';
 import 'package:hello_flutter/presentation/values/dimens.dart';
 
 class MovieListUiMobilePortrait extends StatefulWidget {
@@ -20,18 +22,32 @@ class MovieListUiMobilePortraitState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: valueListenableBuilder(
-        listenable: widget.viewModel.movies,
-        builder: (context, value) {
-          return ListView.builder(
-            itemCount: value.length,
-            itemBuilder: (context, index) {
-              final movie = value[index];
-              return _movieListItemView(movieModel: movie);
-            },
-          );
-        },
-      ),
+      body: _genreWiseMovieList(),
+    );
+  }
+
+  Widget _genreWiseMovieList() {
+    return valueListenableBuilder(
+      listenable: widget.viewModel.moviesGroupedByGenre,
+      builder: (context, value) {
+        return ListView.builder(
+          itemCount: value.length,
+          itemBuilder: (context, index) {
+            final movieListByGenre = value[index];
+            return ExpansionTile(
+              title: Text(
+                movieListByGenre.genre.getLocalizedName(context.localizations),
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+              initiallyExpanded: index == 0,
+              shape: Border.all(color: Colors.transparent),
+              children: movieListByGenre.movies
+                  .map((e) => _movieListItemView(movieModel: e))
+                  .toList(),
+            );
+          },
+        );
+      },
     );
   }
 
