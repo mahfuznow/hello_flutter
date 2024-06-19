@@ -1,8 +1,7 @@
-import 'package:hello_flutter/data/model/movie_model.dart';
-import 'package:hello_flutter/data/model/movie_details_model.dart';
-import 'package:hello_flutter/data/remote/api_client/movie_api_client.dart';
 import 'package:hello_flutter/data/remote/api_service/movie_api_service.dart';
-import 'package:hello_flutter/data/repository/movie_repository.dart';
+import 'package:hello_flutter/domain/model/movie_details_model.dart';
+import 'package:hello_flutter/domain/model/movie_model.dart';
+import 'package:hello_flutter/domain/repository/movie_repository.dart';
 
 class MovieRepositoryImpl implements MovieRepository {
   final MovieApiService movieApiService;
@@ -19,9 +18,11 @@ class MovieRepositoryImpl implements MovieRepository {
 
   @override
   Future<MovieDetailsModel?> getMovieDetails({required String movieId}) async {
-    final movieDetailsResponse = await movieApiService.getMovieDetails(movieId: movieId);
-    if(movieDetailsResponse.data?.movie != null) {
-      return MovieDetailsModel.fromMovieDetailsResponse(movieDetails: movieDetailsResponse.data!.movie!);
+    final movieDetailsResponse =
+        await movieApiService.getMovieDetails(movieId: movieId);
+    if (movieDetailsResponse.data?.movie != null) {
+      return MovieDetailsModel.fromMovieDetailsResponse(
+          movieDetails: movieDetailsResponse.data!.movie!);
     }
     return null;
   }

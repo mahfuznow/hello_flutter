@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:hello_flutter/app/app.dart';
 import 'package:hello_flutter/main/flavors.dart';
+import 'package:hello_flutter/presentation/app/app.dart';
 
 void appMain({required AppFlavor appFlavor}) async {
   F.appFlavor = appFlavor;

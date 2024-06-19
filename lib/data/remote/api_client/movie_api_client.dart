@@ -1,5 +1,6 @@
-import 'package:hello_flutter/data/model/app_user_session.dart';
+
 import 'package:hello_flutter/data/remote/api_client/api_client.dart';
+import 'package:hello_flutter/domain/model/app_user_session.dart';
 
 class MovieApiClient extends ApiClient {
   @override
