@@ -22,11 +22,11 @@ class MovieListUiMobilePortraitState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _genreWiseMovieList(),
+      body: genreWiseMovieExpandableList(),
     );
   }
 
-  Widget _genreWiseMovieList() {
+  Widget genreWiseMovieExpandableList() {
     return valueListenableBuilder(
       listenable: widget.viewModel.moviesGroupedByGenre,
       builder: (context, value) {

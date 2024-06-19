@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hello_flutter/domain/entity/movie.dart';
+import 'package:hello_flutter/presentation/common/extension/context_ext.dart';
 import 'package:hello_flutter/presentation/common/widget/network_image_view.dart';
 import 'package:hello_flutter/presentation/common/widget/rating_view.dart';
 import 'package:hello_flutter/presentation/feature/home/movie_list/screen/movie_list_mobile_portrait.dart';
+import 'package:hello_flutter/presentation/localization/extension/genre_localization_ext.dart';
 import 'package:hello_flutter/presentation/values/dimens.dart';
 
 class MovieListUiMobileLandscape extends MovieListUiMobilePortrait {
@@ -16,23 +18,48 @@ class MovieListUiMobileLandscapeState extends MovieListUiMobilePortraitState {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: valueListenableBuilder(
-        listenable: widget.viewModel.movies,
-        builder: (context, value) {
-          return GridView.builder(
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 4,
-              childAspectRatio: 3 / 4, //width / height
-            ),
-            itemCount: value.length,
-            itemBuilder: (context, index) {
-              final movie = value[index];
-              return _movieListItemView(movieModel: movie);
-            },
-            shrinkWrap: true,
-          );
-        },
-      ),
+      body: genreWiseMovieListHorizontal(),
+    );
+  }
+
+  Widget genreWiseMovieListHorizontal() {
+    return valueListenableBuilder(
+      listenable: widget.viewModel.moviesGroupedByGenre,
+      builder: (context, value) {
+        return ListView.builder(
+          scrollDirection: Axis.vertical,
+          itemCount: value.length,
+          itemBuilder: (context, index) {
+            final movie = value[index];
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: EdgeInsets.all(Dimens.dimen_8),
+                  child: Text(
+                    movie.genre.getLocalizedName(context.localizations),
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                ),
+                SizedBox(
+                  height: Dimens.dimen_250,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: movie.movies.length,
+                    itemBuilder: (context, index) {
+                      final movieModel = movie.movies[index];
+                      return SizedBox(
+                        width: Dimens.dimen_200,
+                        child: _movieListItemView(movieModel: movieModel),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            );
+          },
+        );
+      },
     );
   }
 
