@@ -1,12 +1,12 @@
-import 'package:hello_flutter/domain/model/app_user_session.dart';
+import 'package:hello_flutter/domain/entity/user_session.dart';
 
 abstract class AuthRepository {
-  Future<AppUserSession> login({
+  Future<UserSession> login({
     required String email,
     required String password,
   });
 
-  Future<AppUserSession> register({
+  Future<UserSession> register({
     required String email,
     required String password,
   });

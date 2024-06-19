@@ -1,15 +1,16 @@
-import 'package:hello_flutter/domain/model/app_user_session.dart';
+import 'package:hello_flutter/data/local/shared_preference/entity/user_session_shared_preference_entity.dart';
+import 'package:hello_flutter/domain/entity/user_session.dart';
 import 'package:hello_flutter/domain/repository/auth_repository.dart';
 
 class AuthRepositoryImpl extends AuthRepository {
   @override
-  Future<AppUserSession> login({
+  Future<UserSession> login({
     required String email,
     required String password,
   }) {
     //Dummy network call
     return Future.delayed(const Duration(seconds: 2), () {
-      final user = AppUserSession(
+      final user = UserSessionSharedPreferenceEntity(
         userId: '324234',
         accessToken:
             'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c',
@@ -19,7 +20,7 @@ class AuthRepositoryImpl extends AuthRepository {
         email: email,
       );
       user.saveToSharedPref();
-      return user;
+      return user.toUserSession();
     });
   }
 
@@ -33,19 +34,19 @@ class AuthRepositoryImpl extends AuthRepository {
   @override
   Future<bool> logout() {
     return Future.delayed(const Duration(seconds: 2), () {
-      AppUserSession.example.deleteFromSharedPref();
+      UserSessionSharedPreferenceEntity.example.deleteFromSharedPref();
       return true;
     });
   }
 
   @override
-  Future<AppUserSession> register({
+  Future<UserSession> register({
     required String email,
     required String password,
   }) {
     //Dummy network call
     return Future.delayed(const Duration(seconds: 2), () {
-      final user = AppUserSession(
+      final user = UserSessionSharedPreferenceEntity(
         userId: '324234',
         accessToken:
             'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c',
@@ -54,7 +55,7 @@ class AuthRepositoryImpl extends AuthRepository {
         name: 'John Doe',
         email: email,
       );
-      return user;
+      return user.toUserSession();
     });
   }
 }

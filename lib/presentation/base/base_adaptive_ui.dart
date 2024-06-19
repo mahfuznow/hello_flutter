@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:hello_flutter/data/model/base_exception.dart';
 import 'package:hello_flutter/data/remote/network_exceptions.dart';
-import 'package:hello_flutter/domain/model/base_exception.dart';
 import 'package:hello_flutter/presentation/base/adaptive_util/adaptive_screen_builder.dart';
 import 'package:hello_flutter/presentation/base/base_argument.dart';
 import 'package:hello_flutter/presentation/base/base_route.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hello_flutter/domain/model/movie_model.dart';
+import 'package:hello_flutter/domain/entity/movie.dart';
 import 'package:hello_flutter/presentation/common/widget/network_image_view.dart';
 import 'package:hello_flutter/presentation/common/widget/rating_view.dart';
 import 'package:hello_flutter/presentation/feature/home/movie_list/screen/movie_list_mobile_portrait.dart';
@@ -37,7 +37,7 @@ class MovieListUiMobileLandscapeState extends MovieListUiMobilePortraitState {
   }
 
   Widget _movieListItemView({
-    required MovieModel movieModel,
+    required Movie movieModel,
   }) {
     TextTheme textTheme = Theme.of(context).textTheme;
     return InkWell(

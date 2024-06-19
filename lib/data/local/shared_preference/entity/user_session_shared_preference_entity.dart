@@ -1,14 +1,15 @@
-import 'package:hello_flutter/domain/model/mappable.dart';
-import 'package:hello_flutter/domain/model/shared_prefable.dart';
+import 'package:hello_flutter/data/local/shared_preference/entity/shared_preference_entity.dart';
+import 'package:hello_flutter/data/model/mappable.dart';
+import 'package:hello_flutter/domain/entity/user_session.dart';
 
-class AppUserSession extends SharedPrefable {
+class UserSessionSharedPreferenceEntity extends SharedPreferenceEntity {
   String userId;
   String accessToken;
   String refreshToken;
   String? email;
   String? name;
 
-  AppUserSession({
+  UserSessionSharedPreferenceEntity({
     required this.userId,
     required this.accessToken,
     required this.refreshToken,
@@ -23,14 +24,15 @@ class AppUserSession extends SharedPrefable {
     }
   }
 
-  factory AppUserSession.fromJson(Map<String, dynamic> json) {
+  factory UserSessionSharedPreferenceEntity.fromJson(
+      Map<String, dynamic> json) {
     if (!json.containsKey('userId') ||
         !json.containsKey('accessToken') ||
         !json.containsKey('refreshToken')) {
       throw ArgumentError('Missing required keys in JSON');
     }
 
-    return AppUserSession(
+    return UserSessionSharedPreferenceEntity(
       userId: json['userId'],
       accessToken: json['accessToken'],
       refreshToken: json['refreshToken'],
@@ -52,7 +54,7 @@ class AppUserSession extends SharedPrefable {
 
   @override
   Mappable fromJson(Map<String, dynamic> json) {
-    return AppUserSession.fromJson(json);
+    return UserSessionSharedPreferenceEntity.fromJson(json);
   }
 
   @override
@@ -63,11 +65,22 @@ class AppUserSession extends SharedPrefable {
   @override
   String sharedPrefKey = 'app_user_session';
 
-  static AppUserSession example = AppUserSession(
+  static UserSessionSharedPreferenceEntity example =
+      UserSessionSharedPreferenceEntity(
     userId: '1234',
     accessToken: 'example_access_token',
     refreshToken: 'example_refresh_token',
     name: 'John Doe',
     email: 'john_doe@gmail.com',
   );
+
+  UserSession toUserSession() {
+    return UserSession(
+      userId: userId,
+      accessToken: accessToken,
+      refreshToken: refreshToken,
+      email: email,
+      name: name,
+    );
+  }
 }

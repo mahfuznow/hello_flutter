@@ -1,6 +1,4 @@
-import 'package:hello_flutter/data/remote/response/movie_list_response.dart';
-
-class MovieModel {
+class Movie {
   final String movieId;
   final String title;
   final int year;
@@ -8,7 +6,7 @@ class MovieModel {
   final String poster;
   final bool isFavorite;
 
-  MovieModel({
+  Movie({
     required this.movieId,
     required this.title,
     required this.year,
@@ -16,18 +14,8 @@ class MovieModel {
     required this.poster,
     this.isFavorite = false,
   });
-
-  factory MovieModel.fromResponseMovie(Movie movie) {
-    return MovieModel(
-      movieId: movie.id?.toString() ?? '',
-      title: movie.title ?? '',
-      year: movie.year ?? 0,
-      rating: movie.rating?.toDouble() ?? 0.0,
-      poster: movie.smallCoverImage ?? '',
-    );
-  }
-
-  MovieModel copyWith({
+  
+  Movie copyWith({
     String? movieId,
     String? title,
     int? year,
@@ -35,7 +23,7 @@ class MovieModel {
     String? poster,
     bool? isFavorite,
   }) {
-    return MovieModel(
+    return Movie(
       movieId: movieId ?? this.movieId,
       title: title ?? this.title,
       year: year ?? this.year,

@@ -1,9 +1,8 @@
-
 import 'package:hello_flutter/data/local/shared_preference/shared_preferences_manager.dart';
-import 'package:hello_flutter/domain/model/mappable.dart';
+import 'package:hello_flutter/data/model/mappable.dart';
 
 // This class is used to save, retrieve and delete data from shared preferences
-abstract class SharedPrefable implements Mappable {
+abstract class SharedPreferenceEntity implements Mappable {
   abstract String sharedPrefKey;
 
   final SharedPreferencesManager _sharedPreferencesManager =

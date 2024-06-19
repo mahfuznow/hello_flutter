@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hello_flutter/domain/model/movie_details_model.dart';
+import 'package:hello_flutter/domain/entity/genre.dart';
+import 'package:hello_flutter/domain/entity/movie_details.dart';
 import 'package:hello_flutter/presentation/base/base_ui_state.dart';
 import 'package:hello_flutter/presentation/common/widget/network_image_view.dart';
 import 'package:hello_flutter/presentation/common/widget/rating_view.dart';
@@ -32,7 +33,7 @@ class MovieDetailsUiMobilePortraitState
   }
 
   Widget _movieDetailsView({
-    required MovieDetailsModel movieDetailsModel,
+    required MovieDetails movieDetailsModel,
   }) {
     return SingleChildScrollView(
       child: Column(
@@ -53,7 +54,7 @@ class MovieDetailsUiMobilePortraitState
     );
   }
 
-  Widget _buildMovieInfo(MovieDetailsModel movieDetailsModel) {
+  Widget _buildMovieInfo(MovieDetails movieDetailsModel) {
     return Padding(
       padding: EdgeInsets.all(Dimens.dimen_16),
       child: Column(
@@ -97,7 +98,7 @@ class MovieDetailsUiMobilePortraitState
     );
   }
 
-  Widget _buildGenres(List<GenreModel> genres) {
+  Widget _buildGenres(List<Genre> genres) {
     return Wrap(
       children: genres
           .map((e) => Padding(

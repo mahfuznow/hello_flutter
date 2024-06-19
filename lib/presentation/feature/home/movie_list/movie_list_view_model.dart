@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:hello_flutter/data/remote/api_client/movie_api_client.dart';
 import 'package:hello_flutter/data/remote/api_service/movie_api_service_impl.dart';
 import 'package:hello_flutter/data/repository/movie_repository_impl.dart';
-import 'package:hello_flutter/domain/model/movie_model.dart';
+import 'package:hello_flutter/domain/entity/movie.dart';
 import 'package:hello_flutter/domain/repository/movie_repository.dart';
 import 'package:hello_flutter/presentation/base/base_viewmodel.dart';
 import 'package:hello_flutter/presentation/feature/home/movie_list/route/movie_list_argument.dart';
@@ -21,9 +21,9 @@ class MovieListViewModel extends BaseViewModel<MovieListArgument> {
 
   final MovieRepository movieRepository;
 
-  final ValueNotifierList<MovieModel> _movies = ValueNotifierList([]);
+  final ValueNotifierList<Movie> _movies = ValueNotifierList([]);
 
-  ValueListenable<List<MovieModel>> get movies => _movies;
+  ValueListenable<List<Movie>> get movies => _movies;
 
   MovieListViewModel({required this.movieRepository});
 
@@ -36,14 +36,13 @@ class MovieListViewModel extends BaseViewModel<MovieListArgument> {
   }
 
   void fetchMovies() async {
-    List<MovieModel>? movies =
-        await loadData(() => movieRepository.getMovieList());
+    List<Movie>? movies = await loadData(() => movieRepository.getMovieList());
     if (movies != null && movies.isNotEmpty) {
       _movies.value = movies;
     }
   }
 
-  void onMovieItemClicked(MovieModel movie) {
+  void onMovieItemClicked(Movie movie) {
     navigateToScreen(
       destination: MovieDetailsRoute(
         arguments: MovieDetailsArgument(movieId: movie.movieId),
@@ -51,7 +50,7 @@ class MovieListViewModel extends BaseViewModel<MovieListArgument> {
     );
   }
 
-  void onClickedFavorite(MovieModel movie) {
+  void onClickedFavorite(Movie movie) {
     _movies.updateItem(
       movie,
       movie.copyWith(isFavorite: !movie.isFavorite),
