@@ -1,7 +1,4 @@
 import 'package:flutter/foundation.dart';
-import 'package:hello_flutter/data/remote/api_client/movie_api_client.dart';
-import 'package:hello_flutter/data/remote/api_service/movie_api_service_impl.dart';
-import 'package:hello_flutter/data/repository/movie_repository_impl.dart';
 import 'package:hello_flutter/domain/entity/movie.dart';
 import 'package:hello_flutter/domain/entity/movie_list_by_category.dart';
 import 'package:hello_flutter/domain/repository/movie_repository.dart';
@@ -12,14 +9,6 @@ import 'package:hello_flutter/presentation/feature/movieDetails/route/movie_deta
 import 'package:hello_flutter/presentation/util/value_notifier_list.dart';
 
 class MovieListViewModel extends BaseViewModel<MovieListArgument> {
-  static MovieListViewModel singleton = MovieListViewModel(
-    movieRepository: MovieRepositoryImpl(
-      movieApiService: MovieApiServiceImpl(
-        apiClient: MovieApiClient(),
-      ),
-    ),
-  );
-
   final MovieRepository movieRepository;
 
   final ValueNotifierList<Movie> _movies = ValueNotifierList([]);

@@ -4,6 +4,7 @@ import 'package:hello_flutter/data/model/base_exception.dart';
 import 'package:hello_flutter/data/remote/network_exceptions.dart';
 import 'package:hello_flutter/presentation/base/adaptive_util/adaptive_screen_builder.dart';
 import 'package:hello_flutter/presentation/base/base_argument.dart';
+import 'package:hello_flutter/presentation/base/base_binding.dart';
 import 'package:hello_flutter/presentation/base/base_route.dart';
 import 'package:hello_flutter/presentation/base/base_state.dart';
 import 'package:hello_flutter/presentation/base/base_ui_state.dart';
@@ -24,36 +25,57 @@ abstract class BaseAdaptiveUiState<
     A extends BaseArgument,
     R extends BaseRoute<A>,
     W extends BaseAdaptiveUi<A, R>,
-    V extends BaseViewModel<A>> extends BaseUiState<W> {
-  abstract V viewModel;
+    V extends BaseViewModel<A>,
+    B extends BaseBinding> extends BaseUiState<W> {
+  abstract B binding;
+
+  late V viewModel;
+  bool _isDependencyInitialized = false;
 
   @override
   void initState() {
     super.initState();
+    _initializeDependencies();
+  }
 
+  Future<void> _initializeDependencies() async {
+    await binding.addDependencies();
+
+    viewModel = await binding.diModule.resolve<V>();
+    _isDependencyInitialized = true;
+    viewModel.baseState.addListener(_baseStateListener);
+    setState(() {});
+    _addPostFrameCallback();
+  }
+
+  void _addPostFrameCallback() {
     //This is used to call the onViewReady method once the widget is fully rendered
     WidgetsBinding.instance.addPostFrameCallback(
       (timeStamp) {
         onViewReady(argument: widget.argument);
       },
     );
-
-    viewModel.baseState.addListener(_baseStateListener);
   }
 
   @protected
   void onViewReady({A? argument}) {
+    if (!_isDependencyInitialized) return;
     viewModel.onViewReady(argument: argument);
   }
 
   @override
   void dispose() {
+    if (!_isDependencyInitialized) return;
     viewModel.baseState.removeListener(_baseStateListener);
+    binding.removeDependencies();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    if (!_isDependencyInitialized) {
+      return const SizedBox.shrink();
+    }
     return AdaptiveScreenBuilder(
       mobilePortraitContentBuilder: mobilePortraitContents,
       mobileLandscapeContentBuilder: mobileLandscapeContents,

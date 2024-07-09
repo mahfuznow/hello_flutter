@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hello_flutter/presentation/base/base_adaptive_ui.dart';
+import 'package:hello_flutter/presentation/feature/home/movie_list/binding/movie_list_binding.dart';
 import 'package:hello_flutter/presentation/feature/home/movie_list/movie_list_view_model.dart';
 import 'package:hello_flutter/presentation/feature/home/movie_list/route/movie_list_argument.dart';
 import 'package:hello_flutter/presentation/feature/home/movie_list/route/movie_list_route.dart';
@@ -15,9 +16,9 @@ class MovieListAdaptiveUi
 }
 
 class MovieListAdaptiveUiState extends BaseAdaptiveUiState<MovieListArgument,
-    MovieListRoute, MovieListAdaptiveUi, MovieListViewModel> {
+    MovieListRoute, MovieListAdaptiveUi, MovieListViewModel, MovieListBinding> {
   @override
-  MovieListViewModel viewModel = MovieListViewModel.singleton;
+  MovieListBinding binding = MovieListBinding();
 
   @override
   StatefulWidget mobilePortraitContents(BuildContext context) {

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hello_flutter/data/remote/api_client/movie_api_client.dart';
-import 'package:hello_flutter/data/remote/api_service/movie_api_service_impl.dart';
-import 'package:hello_flutter/data/repository/movie_repository_impl.dart';
 import 'package:hello_flutter/presentation/base/base_adaptive_ui.dart';
+import 'package:hello_flutter/presentation/feature/movieDetails/binding/movie_details_binding.dart';
 import 'package:hello_flutter/presentation/feature/movieDetails/movie_details_view_model.dart';
 import 'package:hello_flutter/presentation/feature/movieDetails/route/movie_details_argument.dart';
 import 'package:hello_flutter/presentation/feature/movieDetails/route/movie_details_route.dart';
@@ -24,15 +22,10 @@ class MovieDetailsAdaptiveUiState extends BaseAdaptiveUiState<
     MovieDetailsArgument,
     MovieDetailsRoute,
     MovieDetailsAdaptiveUi,
-    MovieDetailsViewModel> {
+    MovieDetailsViewModel,
+    MovieDetailsBinding> {
   @override
-  MovieDetailsViewModel viewModel = MovieDetailsViewModel(
-    movieRepository: MovieRepositoryImpl(
-      movieApiService: MovieApiServiceImpl(
-        apiClient: MovieApiClient(),
-      ),
-    ),
-  );
+  MovieDetailsBinding binding = MovieDetailsBinding();
 
   @override
   StatefulWidget mobilePortraitContents(BuildContext context) {

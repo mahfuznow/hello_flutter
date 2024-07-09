@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hello_flutter/presentation/base/base_adaptive_ui.dart';
+import 'package:hello_flutter/presentation/feature/home/binding/home_binding.dart';
 import 'package:hello_flutter/presentation/feature/home/home_view_model.dart';
 import 'package:hello_flutter/presentation/feature/home/route/home_argument.dart';
 import 'package:hello_flutter/presentation/feature/home/route/home_route.dart';
@@ -17,24 +18,9 @@ class HomeAdaptiveUi extends BaseAdaptiveUi<HomeArgument, HomeRoute> {
 }
 
 class HomeAdaptiveUiState extends BaseAdaptiveUiState<HomeArgument, HomeRoute,
-    HomeAdaptiveUi, HomeViewModel> {
+    HomeAdaptiveUi, HomeViewModel, HomeBinding> {
   @override
-  HomeViewModel viewModel = HomeViewModel();
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return super.build(context);
-  }
+  HomeBinding binding = HomeBinding();
 
   @override
   StatefulWidget mobilePortraitContents(BuildContext context) {
