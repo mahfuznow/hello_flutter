@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hello_flutter/domain/repository/auth_repository.dart';
+import 'package:domain/repository/auth_repository.dart';
 import 'package:hello_flutter/presentation/base/base_viewmodel.dart';
 import 'package:hello_flutter/presentation/common/extension/context_ext.dart';
 import 'package:hello_flutter/presentation/feature/auth/login/route/login_argument.dart';

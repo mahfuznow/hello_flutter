@@ -1,7 +1,7 @@
 import 'dart:io';
 
+import 'package:data/di/data_module.dart';
 import 'package:flutter/material.dart';
-import 'package:hello_flutter/presentation/app/app_module.dart';
 import 'package:hello_flutter/presentation/base/screen_util/screen_util_builder.dart';
 import 'package:hello_flutter/presentation/localization/generated/app_localizations.dart';
 import 'package:hello_flutter/presentation/navigation/app_router.dart';
@@ -17,17 +17,17 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  final AppModule _appModule = AppModule();
+  final DataModule _dataModule = DataModule();
 
   @override
   void initState() {
     super.initState();
-    _appModule.injectDependencies();
+    _dataModule.injectDependencies();
   }
 
   @override
   void dispose() {
-    _appModule.removeDependencies();
+    _dataModule.removeDependencies();
     super.dispose();
   }
 

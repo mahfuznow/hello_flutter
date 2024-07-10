@@ -1,4 +1,4 @@
-import 'package:hello_flutter/domain/entity/genre.dart';
+import 'package:domain/model/genre.dart';
 import 'package:hello_flutter/presentation/localization/generated/app_localizations.dart';
 
 extension GenreLocalizationExt on Genre {

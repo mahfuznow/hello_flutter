@@ -1,4 +1,4 @@
-import 'package:hello_flutter/domain/repository/movie_repository.dart';
+import 'package:domain/repository/movie_repository.dart';
 import 'package:hello_flutter/presentation/base/base_binding.dart';
 import 'package:hello_flutter/presentation/feature/home/movie_list/movie_list_view_model.dart';
 

@@ -1,4 +1,4 @@
-import 'package:hello_flutter/domain/repository/auth_repository.dart';
+import 'package:domain/repository/auth_repository.dart';
 import 'package:hello_flutter/presentation/base/base_binding.dart';
 import 'package:hello_flutter/presentation/feature/auth/login/login_view_model.dart';
 

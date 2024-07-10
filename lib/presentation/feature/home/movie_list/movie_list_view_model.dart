@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
-import 'package:hello_flutter/domain/entity/movie.dart';
-import 'package:hello_flutter/domain/entity/movie_list_by_category.dart';
-import 'package:hello_flutter/domain/repository/movie_repository.dart';
+import 'package:domain/model/movie.dart';
+import 'package:domain/model/movie_list_by_category.dart';
+import 'package:domain/repository/movie_repository.dart';
 import 'package:hello_flutter/presentation/base/base_viewmodel.dart';
 import 'package:hello_flutter/presentation/feature/home/movie_list/route/movie_list_argument.dart';
 import 'package:hello_flutter/presentation/feature/movieDetails/route/movie_details_argument.dart';

@@ -1,5 +1,5 @@
+import 'package:domain/model/movie.dart';
 import 'package:flutter/material.dart';
-import 'package:hello_flutter/domain/entity/movie.dart';
 import 'package:hello_flutter/presentation/base/base_ui_state.dart';
 import 'package:hello_flutter/presentation/common/extension/context_ext.dart';
 import 'package:hello_flutter/presentation/common/widget/network_image_view.dart';

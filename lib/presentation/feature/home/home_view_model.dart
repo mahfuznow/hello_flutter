@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:hello_flutter/data/local/shared_preference/entity/user_session_shared_preference_entity.dart';
+import 'package:data/local/shared_preference/entity/user_session_shared_preference_entity.dart';
 import 'package:hello_flutter/presentation/base/base_viewmodel.dart';
 import 'package:hello_flutter/presentation/feature/home/bottom_navigation_item_type.dart';
 import 'package:hello_flutter/presentation/feature/home/route/home_argument.dart';
