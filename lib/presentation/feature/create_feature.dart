@@ -1,12 +1,18 @@
 import 'dart:io';
 
 void main(List<String> arguments) {
-  if (arguments.isEmpty) {
-    print('Please provide a feature name.');
-    return;
-  }
+  String? featureName = '';
 
-  final featureName = arguments[0];
+  if (arguments.isEmpty) {
+    print('Please provide a feature name:');
+    featureName = stdin.readLineSync();
+    if (featureName == null || featureName.isEmpty) {
+      print('Feature name cannot be empty.');
+      return;
+    }
+  } else {
+    featureName = arguments[0];
+  }
   createFeatureStructure(featureName);
 }
 
@@ -44,6 +50,8 @@ void createFeatureStructure(String featureName) {
   });
 
   print('Feature "$featureName" structure created successfully.');
+
+  updateRoutePath(featureName);
 }
 
 String bindingContent(String featureName) => '''
@@ -214,6 +222,57 @@ class ${featureName.capitalize()}ViewModel extends BaseViewModel<${featureName.c
     
 }
 ''';
+
+void updateRoutePath(String featureName) {
+  final enumFilePath = File('../navigation/route_path.dart');
+
+  if (!enumFilePath.existsSync()) {
+    print('RoutePath enum file not found.');
+    return;
+  }
+
+  // Read the existing enum file content
+  String enumContent = enumFilePath.readAsStringSync();
+
+  // Add necessary imports for dashboard after the last import statement
+  final newImports = '''
+import 'package:hello_flutter/presentation/feature/$featureName/route/dashboard_argument.dart';
+import 'package:hello_flutter/presentation/feature/$featureName/route/dashboard_route.dart';
+''';
+
+  enumContent = '$newImports\n$enumContent';
+
+  // 1. Replace the semicolon at the end of the last enum entry with a comma and add the new enum entry
+  enumContent = enumContent.replaceFirst(
+      RegExp(r'(\s*unknown;)'), '\n  $featureName, \n  unknown;');
+
+  // 2. Insert new cases for fromString, toPathString, and getAppRoute methods
+  // Insert the new case for fromString method
+  enumContent = enumContent.replaceFirstMapped(
+      RegExp(r'(default:\s+return RoutePath\.unknown;)'),
+      (match) =>
+          "case '/$featureName':\n        return RoutePath.$featureName;\n      ${match.group(0)}");
+
+  // Insert the new case for toPathString method
+  enumContent = enumContent.replaceFirstMapped(
+      RegExp(r"(default:\s+return '';)", multiLine: true),
+      (match) =>
+          "case RoutePath.$featureName:\n        return '/$featureName';\n      ${match.group(0)}");
+
+  // Insert the new case for getAppRoute method
+  enumContent = enumContent.replaceFirstMapped(
+      RegExp(r'(default:\s+return UnknownRoute\(arguments: arguments\);)'),
+      (match) =>
+          "case RoutePath.$featureName:\n        if (arguments is! ${featureName.capitalize()}Argument) {\n          throw Exception('${featureName.capitalize()}Argument is required');\n        }\n        return ${featureName.capitalize()}Route(arguments: arguments);\n      ${match.group(0)}");
+
+  // Write the updated content back to the file
+  try {
+    enumFilePath.writeAsStringSync(enumContent);
+    print('RoutePath updated successfully with new feature: $featureName');
+  } catch (e) {
+    print('Failed to update RoutePath: $e');
+  }
+}
 
 extension StringExtension on String {
   String capitalize() {
