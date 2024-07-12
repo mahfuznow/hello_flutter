@@ -13,6 +13,7 @@ void main(List<String> arguments) {
   } else {
     featureName = arguments[0];
   }
+  //TODO: maintain toLowerCase and convert to snakeCase & camelcase and use appropriately
   createFeatureStructure(featureName);
 }
 
@@ -240,7 +241,7 @@ import 'package:hello_flutter/presentation/feature/$featureName/route/${featureN
 import 'package:hello_flutter/presentation/feature/$featureName/route/${featureName}_route.dart';
 ''';
 
-  enumContent = '$newImports\n$enumContent';
+  enumContent = newImports + enumContent;
 
   // 1. Replace the semicolon at the end of the last enum entry with a comma and add the new enum entry
   enumContent = enumContent.replaceFirst(
