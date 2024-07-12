@@ -80,7 +80,7 @@ class ${featureClassName}Binding extends BaseBinding {
   Future<void> addDependencies() async {
     // ${featureClassName}Repository ${featureVariableName}Repository = await diModule.resolve<${featureClassName}Repository>();
     // return diModule.registerInstance(
-    //   ${featureClassName}ViewModel(movieRepository: movieRepository),
+    //   ${featureClassName}ViewModel(${featureVariableName}Repository: ${featureVariableName}Repository),
     // );
   }
 
@@ -94,7 +94,12 @@ class ${featureClassName}Binding extends BaseBinding {
 String argumentContent() => '''
 import 'package:hello_flutter/presentation/base/base_argument.dart';
 
-class ${featureClassName}Argument extends BaseArgument {}
+class ${featureClassName}Argument extends BaseArgument {
+  // int id;
+  // String name;
+  //
+  // HelloWorldArgument({required this.id, required this.name});
+}
 ''';
 
 String routeContent() => '''
