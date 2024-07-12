@@ -121,7 +121,7 @@ class ${featureName.capitalize()}MobilePortraitState extends BaseUiState<${featu
         listenable: widget.viewModel.message,
         builder: (context, value) {
           return InkWell(
-            child: Text('Dashboard: \$value'),
+            child: Text('${featureName.capitalize()}: \$value'),
             onTap: () => widget.viewModel.onClick(),
           );
         },
@@ -150,7 +150,7 @@ class ${featureName.capitalize()}MobileLandscapeState extends ${featureName.capi
         listenable: widget.viewModel.message,
         builder: (context, value) {
           return InkWell(
-            child: Text('Dashboard: \$value'),
+            child: Text('${featureName.capitalize()}: \$value'),
             onTap: () => widget.viewModel.onClick(),
           );
         },
@@ -234,10 +234,10 @@ void updateRoutePath(String featureName) {
   // Read the existing enum file content
   String enumContent = enumFilePath.readAsStringSync();
 
-  // Add necessary imports for dashboard after the last import statement
+  // Add necessary imports for new feature after the last import statement
   final newImports = '''
-import 'package:hello_flutter/presentation/feature/$featureName/route/dashboard_argument.dart';
-import 'package:hello_flutter/presentation/feature/$featureName/route/dashboard_route.dart';
+import 'package:hello_flutter/presentation/feature/$featureName/route/${featureName}_argument.dart';
+import 'package:hello_flutter/presentation/feature/$featureName/route/${featureName}_route.dart';
 ''';
 
   enumContent = '$newImports\n$enumContent';
