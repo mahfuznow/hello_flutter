@@ -1,9 +1,53 @@
 import 'dart:io';
 
+const String packageDir = 'hello_flutter';
+const String presentationDir = '$packageDir/presentation';
+const String baseDir = '$presentationDir/base';
+
+const String baseBindingFile = '$baseDir/base_binding.dart';
+const String baseArgumentFile = '$baseDir/base_argument.dart';
+const String baseRouteFile = '$baseDir/base_route.dart';
+const String baseUiStateFile = '$baseDir/base_ui_state.dart';
+const String baseAdaptiveUiFile = '$baseDir/base_adaptive_ui.dart';
+const String baseViewModelFile = '$baseDir/base_viewmodel.dart';
+
+const String navigationDir = '$presentationDir/navigation';
+const String navigationRouteFilePath = '$navigationDir/route_path.dart';
+
 String featurePathName = ''; // example_feature
 String featureVariableName =
     convertSnakeCaseToCamelCase(featurePathName); // exampleFeature
 String featureClassName = featurePathName.capitalize(); // ExampleFeature
+
+const String featureDir = '$presentationDir/feature';
+
+String get featurePath => '$featureDir/$featurePathName';
+
+String get featureBindingDir => '$featurePath/binding';
+
+String get featureBindingFile =>
+    '$featureBindingDir/${featurePathName}_binding.dart';
+
+String get featureScreenDir => '$featurePath/screen';
+
+String get featureMobilePortraitFile =>
+    '$featureScreenDir/_mobile_portrait.dart';
+
+String get featureMobileLandscapeFile =>
+    '$featureScreenDir/_mobile_landscape.dart';
+
+String get featureRouteDir => '$featurePath/route';
+
+String get featureRouteFile => '$featureRouteDir/${featurePathName}_route.dart';
+
+String get featureArgumentFile =>
+    '$featureRouteDir/${featurePathName}_argument.dart';
+
+String get featureViewModelFile =>
+    '$featurePath/${featurePathName}_view_model.dart';
+
+String get featureAdaptiveUiFile =>
+    '$featurePath/${featurePathName}_adaptive_ui.dart';
 
 void main(List<String> arguments) {
   String? inputFeatureName = '';
@@ -28,8 +72,8 @@ void main(List<String> arguments) {
   print('Feature class name: $featureClassName');
 
   //check if feature already exists
-  final featurePath = Directory(featurePathName);
-  if (featurePath.existsSync()) {
+  final targetDir = Directory(featurePathName);
+  if (targetDir.existsSync()) {
     print(
         'Feature "$featurePathName" already exists. try again with different name');
     return;
@@ -40,31 +84,37 @@ void main(List<String> arguments) {
 
 void createFeatureStructure() {
   final paths = [
-    '$featurePathName/binding',
-    '$featurePathName/route',
-    '$featurePathName/screen',
+    featureBindingDir,
+    featureRouteDir,
+    featureScreenDir,
   ];
 
   final files = {
-    '$featurePathName/binding/${featurePathName}_binding.dart':
-        bindingContent(),
-    '$featurePathName/route/${featurePathName}_argument.dart':
-        argumentContent(),
-    '$featurePathName/route/${featurePathName}_route.dart': routeContent(),
-    '$featurePathName/screen/${featurePathName}_mobile_portrait.dart':
-        mobilePortraitContent(),
-    '$featurePathName/screen/${featurePathName}_mobile_landscape.dart':
-        mobileLandscapeContent(),
-    '$featurePathName/${featurePathName}_adaptive_ui.dart': adaptiveUiContent(),
-    '$featurePathName/${featurePathName}_view_model.dart': viewModelContent(),
+    featureBindingDir: bindingContent(),
+    featureArgumentFile: argumentContent(),
+    featureRouteFile: routeContent(),
+    featureMobilePortraitFile: mobilePortraitContent(),
+    featureMobileLandscapeFile: mobileLandscapeContent(),
+    featureAdaptiveUiFile: adaptiveUiContent(),
+    featureViewModelFile: viewModelContent(),
   };
 
   for (final path in paths) {
-    Directory(path).createSync(recursive: true);
+    try {
+      Directory(path).createSync(recursive: true);
+    } catch (e) {
+      print('Failed to create directory: $path. Error: $e');
+      return;
+    }
   }
 
   files.forEach((filePath, fileContent) {
-    File(filePath).writeAsStringSync(fileContent);
+    try {
+      File(filePath).writeAsStringSync(fileContent);
+    } catch (e) {
+      print('Failed to create file: $filePath. Error: $e');
+      return;
+    }
   });
 
   print('Feature "$featurePathName" structure created successfully.');
@@ -73,7 +123,7 @@ void createFeatureStructure() {
 }
 
 String bindingContent() => '''
-import 'package:hello_flutter/presentation/base/base_binding.dart';
+import 'package:$baseBindingFile';
 
 class ${featureClassName}Binding extends BaseBinding {
   @override
@@ -92,7 +142,7 @@ class ${featureClassName}Binding extends BaseBinding {
 ''';
 
 String argumentContent() => '''
-import 'package:hello_flutter/presentation/base/base_argument.dart';
+import 'package:$baseArgumentFile';
 
 class ${featureClassName}Argument extends BaseArgument {
   // int id;
@@ -104,10 +154,10 @@ class ${featureClassName}Argument extends BaseArgument {
 
 String routeContent() => '''
 import 'package:flutter/material.dart';
-import 'package:hello_flutter/presentation/base/base_route.dart';
-import 'package:hello_flutter/presentation/navigation/route_path.dart';
-import '../${featurePathName}_adaptive_ui.dart';
-import '../route/${featurePathName}_argument.dart';
+import '$baseRouteFile';
+import '$navigationRouteFilePath';
+import '$featureAdaptiveUiFile';
+import '$featureArgumentFile';
 
 class ${featureClassName}Route extends BaseRoute<${featureClassName}Argument> {
   @override
@@ -124,8 +174,8 @@ class ${featureClassName}Route extends BaseRoute<${featureClassName}Argument> {
 
 String mobilePortraitContent() => '''
 import 'package:flutter/material.dart';
-import 'package:hello_flutter/presentation/base/base_ui_state.dart';
-import '../${featurePathName}_view_model.dart';
+import '$baseUiStateFile';
+import '$featureViewModelFile';
 
 class ${featureClassName}MobilePortrait extends StatefulWidget {
   final ${featureClassName}ViewModel viewModel;
@@ -156,7 +206,7 @@ class ${featureClassName}MobilePortraitState extends BaseUiState<${featureClassN
 
 String mobileLandscapeContent() => '''
 import 'package:flutter/material.dart';
-import '../screen/${featurePathName}_mobile_portrait.dart';
+import '$featureMobilePortraitFile';
 
 class ${featureClassName}MobileLandscape extends ${featureClassName}MobilePortrait {
   const ${featureClassName}MobileLandscape({required super.viewModel, super.key});
@@ -185,13 +235,13 @@ class ${featureClassName}MobileLandscapeState extends ${featureClassName}MobileP
 
 String adaptiveUiContent() => '''
 import 'package:flutter/material.dart';
-import 'package:hello_flutter/presentation/base/base_adaptive_ui.dart';
-import './binding/${featurePathName}_binding.dart';
-import './${featurePathName}_view_model.dart';
-import './route/${featurePathName}_argument.dart';
-import './route/${featurePathName}_route.dart';
-import './screen/${featurePathName}_mobile_landscape.dart';
-import './screen/${featurePathName}_mobile_portrait.dart';
+import '$baseAdaptiveUiFile';
+import '$featureBindingDir;
+import '$featureArgumentFile';
+import '$featureViewModelFile';
+import '$featureRouteFile';
+import '$featureMobilePortraitFile';
+import '$featureMobileLandscapeFile';
 
 class ${featureClassName}AdaptiveUi extends BaseAdaptiveUi<${featureClassName}Argument, ${featureClassName}Route> {
   const ${featureClassName}AdaptiveUi({super.key});
@@ -218,15 +268,15 @@ class ${featureClassName}AdaptiveUiState extends BaseAdaptiveUiState<${featureCl
 
 String viewModelContent() => '''
 import 'package:flutter/foundation.dart';
-import 'package:hello_flutter/presentation/base/base_viewmodel.dart';
-import './route/${featurePathName}_argument.dart';
+import '$baseViewModelFile';
+import '$featureArgumentFile';
 
 class ${featureClassName}ViewModel extends BaseViewModel<${featureClassName}Argument> {
 
   final ValueNotifier<String> _message = ValueNotifier('$featureClassName');
 
   ValueListenable<String> get message => _message;
-  
+
   int count = 0;
 
   ${featureClassName}ViewModel();
@@ -235,17 +285,17 @@ class ${featureClassName}ViewModel extends BaseViewModel<${featureClassName}Argu
   void onViewReady({${featureClassName}Argument? argument}) {
     super.onViewReady();
   }
-  
+
   void onClick() {
      count++;
     _message.value = '\${message.value}\$count';
   }
-    
+
 }
 ''';
 
 void updateRoutePath() {
-  final enumFilePath = File('../navigation/route_path.dart');
+  final enumFilePath = File(navigationRouteFilePath);
 
   if (!enumFilePath.existsSync()) {
     print('RoutePath enum file not found.');
@@ -257,8 +307,8 @@ void updateRoutePath() {
 
   // Add necessary imports for new feature after the last import statement
   final newImports = '''
-import 'package:hello_flutter/presentation/feature/$featurePathName/route/${featurePathName}_argument.dart';
-import 'package:hello_flutter/presentation/feature/$featurePathName/route/${featurePathName}_route.dart';
+import '$featureArgumentFile';
+import '$featureRouteFile';
 ''';
 
   enumContent = newImports + enumContent;
