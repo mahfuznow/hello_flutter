@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hello_flutter/data/repository/auth_repository_impl.dart';
 import 'package:hello_flutter/presentation/base/base_adaptive_ui.dart';
+import 'package:hello_flutter/presentation/feature/auth/login/binding/login_binding.dart';
 import 'package:hello_flutter/presentation/feature/auth/login/login_view_model.dart';
 import 'package:hello_flutter/presentation/feature/auth/login/route/login_argument.dart';
 import 'package:hello_flutter/presentation/feature/auth/login/route/login_route.dart';
@@ -15,11 +15,9 @@ class LoginAdaptiveUi extends BaseAdaptiveUi<LoginArgument, LoginRoute> {
 }
 
 class LoginAdaptiveUiState extends BaseAdaptiveUiState<LoginArgument,
-    LoginRoute, LoginAdaptiveUi, LoginViewModel> {
+    LoginRoute, LoginAdaptiveUi, LoginViewModel, LoginBinding> {
   @override
-  LoginViewModel viewModel = LoginViewModel(
-    authRepository: AuthRepositoryImpl(),
-  );
+  LoginBinding binding = LoginBinding();
 
   @override
   StatefulWidget mobilePortraitContents(BuildContext context) {

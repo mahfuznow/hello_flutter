@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hello_flutter/domain/entity/genre.dart';
-import 'package:hello_flutter/domain/entity/movie_details.dart';
+import 'package:domain/model/genre.dart';
+import 'package:domain/model/movie_details.dart';
 import 'package:hello_flutter/presentation/base/base_ui_state.dart';
 import 'package:hello_flutter/presentation/common/widget/network_image_view.dart';
 import 'package:hello_flutter/presentation/common/widget/rating_view.dart';

@@ -1,4 +1,4 @@
-import 'package:hello_flutter/data/model/base_exception.dart';
+import 'package:domain/model/base_exception.dart';
 import 'package:hello_flutter/presentation/base/base_route.dart';
 import 'package:hello_flutter/presentation/localization/ui_text.dart';
 
