@@ -1,45 +1,62 @@
 import 'dart:io';
 
+String featurePathName = ''; // example_feature
+String featureVariableName =
+    convertSnakeCaseToCamelCase(featurePathName); // exampleFeature
+String featureClassName = featurePathName.capitalize(); // ExampleFeature
+
 void main(List<String> arguments) {
-  String? featureName = '';
+  String? inputFeatureName = '';
 
   if (arguments.isEmpty) {
-    print('Please provide a feature name:');
-    featureName = stdin.readLineSync();
-    if (featureName == null || featureName.isEmpty) {
+    print('Enter new feature name:');
+    inputFeatureName = stdin.readLineSync();
+    if (inputFeatureName == null || inputFeatureName.isEmpty) {
       print('Feature name cannot be empty.');
       return;
     }
   } else {
-    featureName = arguments[0];
+    inputFeatureName = arguments[0].trim();
   }
-  //TODO: maintain toLowerCase and convert to snakeCase & camelcase and use appropriately
-  createFeatureStructure(featureName);
+
+  featurePathName = convertToSnakeCase(inputFeatureName);
+  featureVariableName = convertSnakeCaseToCamelCase(featurePathName);
+  featureClassName = featureVariableName.capitalize();
+
+  print('Feature path name: $featurePathName');
+  print('Feature variable name: $featureVariableName');
+  print('Feature class name: $featureClassName');
+
+  //check if feature already exists
+  final featurePath = Directory(featurePathName);
+  if (featurePath.existsSync()) {
+    print(
+        'Feature "$featurePathName" already exists. try again with different name');
+    return;
+  }
+
+  createFeatureStructure();
 }
 
-void createFeatureStructure(String featureName) {
-  final featurePath = featureName;
-
+void createFeatureStructure() {
   final paths = [
-    '$featurePath/binding',
-    '$featurePath/route',
-    '$featurePath/screen',
+    '$featurePathName/binding',
+    '$featurePathName/route',
+    '$featurePathName/screen',
   ];
 
   final files = {
-    '$featurePath/binding/${featureName}_binding.dart':
-        bindingContent(featureName),
-    '$featurePath/route/${featureName}_argument.dart':
-        argumentContent(featureName),
-    '$featurePath/route/${featureName}_route.dart': routeContent(featureName),
-    '$featurePath/screen/${featureName}_mobile_portrait.dart':
-        mobilePortraitContent(featureName),
-    '$featurePath/screen/${featureName}_mobile_landscape.dart':
-        mobileLandscapeContent(featureName),
-    '$featurePath/${featureName}_adaptive_ui.dart':
-        adaptiveUiContent(featureName),
-    '$featurePath/${featureName}_view_model.dart':
-        viewModelContent(featureName),
+    '$featurePathName/binding/${featurePathName}_binding.dart':
+        bindingContent(),
+    '$featurePathName/route/${featurePathName}_argument.dart':
+        argumentContent(),
+    '$featurePathName/route/${featurePathName}_route.dart': routeContent(),
+    '$featurePathName/screen/${featurePathName}_mobile_portrait.dart':
+        mobilePortraitContent(),
+    '$featurePathName/screen/${featurePathName}_mobile_landscape.dart':
+        mobileLandscapeContent(),
+    '$featurePathName/${featurePathName}_adaptive_ui.dart': adaptiveUiContent(),
+    '$featurePathName/${featurePathName}_view_model.dart': viewModelContent(),
   };
 
   for (final path in paths) {
@@ -50,71 +67,71 @@ void createFeatureStructure(String featureName) {
     File(filePath).writeAsStringSync(fileContent);
   });
 
-  print('Feature "$featureName" structure created successfully.');
+  print('Feature "$featurePathName" structure created successfully.');
 
-  updateRoutePath(featureName);
+  updateRoutePath();
 }
 
-String bindingContent(String featureName) => '''
+String bindingContent() => '''
 import 'package:hello_flutter/presentation/base/base_binding.dart';
 
-class ${featureName.capitalize()}Binding extends BaseBinding {
+class ${featureClassName}Binding extends BaseBinding {
   @override
   Future<void> addDependencies() async {
-    // MovieRepository movieRepository = await diModule.resolve<MovieRepository>();
+    // ${featureClassName}Repository ${featureVariableName}Repository = await diModule.resolve<${featureClassName}Repository>();
     // return diModule.registerInstance(
-    //   ${featureName.capitalize()}ViewModel(movieRepository: movieRepository),
+    //   ${featureClassName}ViewModel(movieRepository: movieRepository),
     // );
   }
 
   @override
   Future<void> removeDependencies() async {
-    // return diModule.unregister<${featureName.capitalize()}ViewModel>();
+    // return diModule.unregister<${featureClassName}ViewModel>();
   }
 }
 ''';
 
-String argumentContent(String featureName) => '''
+String argumentContent() => '''
 import 'package:hello_flutter/presentation/base/base_argument.dart';
 
-class ${featureName.capitalize()}Argument extends BaseArgument {}
+class ${featureClassName}Argument extends BaseArgument {}
 ''';
 
-String routeContent(String featureName) => '''
+String routeContent() => '''
 import 'package:flutter/material.dart';
 import 'package:hello_flutter/presentation/base/base_route.dart';
 import 'package:hello_flutter/presentation/navigation/route_path.dart';
-import '../${featureName}_adaptive_ui.dart';
-import '../route/${featureName}_argument.dart';
+import '../${featurePathName}_adaptive_ui.dart';
+import '../route/${featurePathName}_argument.dart';
 
-class ${featureName.capitalize()}Route extends BaseRoute<${featureName.capitalize()}Argument> {
+class ${featureClassName}Route extends BaseRoute<${featureClassName}Argument> {
   @override
-  RoutePath routePath = RoutePath.$featureName;
+  RoutePath routePath = RoutePath.$featureVariableName;
 
-  ${featureName.capitalize()}Route({required super.arguments});
+  ${featureClassName}Route({required super.arguments});
 
   @override
   MaterialPageRoute toMaterialPageRoute() {
-    return MaterialPageRoute(builder: (_) => const ${featureName.capitalize()}AdaptiveUi());
+    return MaterialPageRoute(builder: (_) => const ${featureClassName}AdaptiveUi());
   }
 }
 ''';
 
-String mobilePortraitContent(String featureName) => '''
+String mobilePortraitContent() => '''
 import 'package:flutter/material.dart';
 import 'package:hello_flutter/presentation/base/base_ui_state.dart';
-import '../${featureName}_view_model.dart';
+import '../${featurePathName}_view_model.dart';
 
-class ${featureName.capitalize()}MobilePortrait extends StatefulWidget {
-  final ${featureName.capitalize()}ViewModel viewModel;
+class ${featureClassName}MobilePortrait extends StatefulWidget {
+  final ${featureClassName}ViewModel viewModel;
 
-  const ${featureName.capitalize()}MobilePortrait({required this.viewModel, super.key});
+  const ${featureClassName}MobilePortrait({required this.viewModel, super.key});
 
   @override
-  State<StatefulWidget> createState() => ${featureName.capitalize()}MobilePortraitState();
+  State<StatefulWidget> createState() => ${featureClassName}MobilePortraitState();
 }
 
-class ${featureName.capitalize()}MobilePortraitState extends BaseUiState<${featureName.capitalize()}MobilePortrait> {
+class ${featureClassName}MobilePortraitState extends BaseUiState<${featureClassName}MobilePortrait> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -122,7 +139,7 @@ class ${featureName.capitalize()}MobilePortraitState extends BaseUiState<${featu
         listenable: widget.viewModel.message,
         builder: (context, value) {
           return InkWell(
-            child: Text('${featureName.capitalize()}: \$value'),
+            child: Text('$featureClassName: \$value'),
             onTap: () => widget.viewModel.onClick(),
           );
         },
@@ -132,18 +149,18 @@ class ${featureName.capitalize()}MobilePortraitState extends BaseUiState<${featu
 }
 ''';
 
-String mobileLandscapeContent(String featureName) => '''
+String mobileLandscapeContent() => '''
 import 'package:flutter/material.dart';
-import '../screen/${featureName}_mobile_portrait.dart';
+import '../screen/${featurePathName}_mobile_portrait.dart';
 
-class ${featureName.capitalize()}MobileLandscape extends ${featureName.capitalize()}MobilePortrait {
-  const ${featureName.capitalize()}MobileLandscape({required super.viewModel, super.key});
+class ${featureClassName}MobileLandscape extends ${featureClassName}MobilePortrait {
+  const ${featureClassName}MobileLandscape({required super.viewModel, super.key});
 
   @override
-  State<StatefulWidget> createState() => ${featureName.capitalize()}MobileLandscapeState();
+  State<StatefulWidget> createState() => ${featureClassName}MobileLandscapeState();
 }
 
-class ${featureName.capitalize()}MobileLandscapeState extends ${featureName.capitalize()}MobilePortraitState {
+class ${featureClassName}MobileLandscapeState extends ${featureClassName}MobilePortraitState {
   @override
   Widget build(BuildContext context) {
    return Scaffold(
@@ -151,7 +168,7 @@ class ${featureName.capitalize()}MobileLandscapeState extends ${featureName.capi
         listenable: widget.viewModel.message,
         builder: (context, value) {
           return InkWell(
-            child: Text('${featureName.capitalize()}: \$value'),
+            child: Text('$featureClassName: \$value'),
             onTap: () => widget.viewModel.onClick(),
           );
         },
@@ -161,58 +178,56 @@ class ${featureName.capitalize()}MobileLandscapeState extends ${featureName.capi
 }
 ''';
 
-String adaptiveUiContent(String featureName) => '''
+String adaptiveUiContent() => '''
 import 'package:flutter/material.dart';
 import 'package:hello_flutter/presentation/base/base_adaptive_ui.dart';
-import './binding/${featureName}_binding.dart';
-import './${featureName}_view_model.dart';
-import './route/${featureName}_argument.dart';
-import './route/${featureName}_route.dart';
-import './screen/${featureName}_mobile_landscape.dart';
-import './screen/${featureName}_mobile_portrait.dart';
+import './binding/${featurePathName}_binding.dart';
+import './${featurePathName}_view_model.dart';
+import './route/${featurePathName}_argument.dart';
+import './route/${featurePathName}_route.dart';
+import './screen/${featurePathName}_mobile_landscape.dart';
+import './screen/${featurePathName}_mobile_portrait.dart';
 
-class ${featureName.capitalize()}AdaptiveUi extends BaseAdaptiveUi<${featureName.capitalize()}Argument, ${featureName.capitalize()}Route> {
-  const ${featureName.capitalize()}AdaptiveUi({super.key});
+class ${featureClassName}AdaptiveUi extends BaseAdaptiveUi<${featureClassName}Argument, ${featureClassName}Route> {
+  const ${featureClassName}AdaptiveUi({super.key});
 
   @override
-  State<StatefulWidget> createState() => ${featureName.capitalize()}AdaptiveUiState();
+  State<StatefulWidget> createState() => ${featureClassName}AdaptiveUiState();
 }
 
-class ${featureName.capitalize()}AdaptiveUiState extends BaseAdaptiveUiState<${featureName.capitalize()}Argument, ${featureName.capitalize()}Route, ${featureName.capitalize()}AdaptiveUi, ${featureName.capitalize()}ViewModel, ${featureName.capitalize()}Binding> {
+class ${featureClassName}AdaptiveUiState extends BaseAdaptiveUiState<${featureClassName}Argument, ${featureClassName}Route, ${featureClassName}AdaptiveUi, ${featureClassName}ViewModel, ${featureClassName}Binding> {
   @override
-  ${featureName.capitalize()}Binding binding = ${featureName.capitalize()}Binding();
+  ${featureClassName}Binding binding = ${featureClassName}Binding();
 
   @override
   StatefulWidget mobilePortraitContents(BuildContext context) {
-    return ${featureName.capitalize()}MobilePortrait(viewModel: viewModel);
+    return ${featureClassName}MobilePortrait(viewModel: viewModel);
   }
 
   @override
   StatefulWidget mobileLandscapeContents(BuildContext context) {
-    return ${featureName.capitalize()}MobileLandscape(viewModel: viewModel);
+    return ${featureClassName}MobileLandscape(viewModel: viewModel);
   }
 }
 ''';
 
-String viewModelContent(String featureName) => '''
+String viewModelContent() => '''
 import 'package:flutter/foundation.dart';
 import 'package:hello_flutter/presentation/base/base_viewmodel.dart';
-import './route/${featureName}_argument.dart';
-import './route/${featureName}_argument.dart';
-import './route/${featureName}_route.dart';
+import './route/${featurePathName}_argument.dart';
 
-class ${featureName.capitalize()}ViewModel extends BaseViewModel<${featureName.capitalize()}Argument> {
+class ${featureClassName}ViewModel extends BaseViewModel<${featureClassName}Argument> {
 
-  final ValueNotifier<String> _message = ValueNotifier('$featureName');
+  final ValueNotifier<String> _message = ValueNotifier('$featureClassName');
 
   ValueListenable<String> get message => _message;
   
   int count = 0;
 
-  ${featureName.capitalize()}ViewModel();
+  ${featureClassName}ViewModel();
 
   @override
-  void onViewReady({${featureName.capitalize()}Argument? argument}) {
+  void onViewReady({${featureClassName}Argument? argument}) {
     super.onViewReady();
   }
   
@@ -224,7 +239,7 @@ class ${featureName.capitalize()}ViewModel extends BaseViewModel<${featureName.c
 }
 ''';
 
-void updateRoutePath(String featureName) {
+void updateRoutePath() {
   final enumFilePath = File('../navigation/route_path.dart');
 
   if (!enumFilePath.existsSync()) {
@@ -237,42 +252,61 @@ void updateRoutePath(String featureName) {
 
   // Add necessary imports for new feature after the last import statement
   final newImports = '''
-import 'package:hello_flutter/presentation/feature/$featureName/route/${featureName}_argument.dart';
-import 'package:hello_flutter/presentation/feature/$featureName/route/${featureName}_route.dart';
+import 'package:hello_flutter/presentation/feature/$featurePathName/route/${featurePathName}_argument.dart';
+import 'package:hello_flutter/presentation/feature/$featurePathName/route/${featurePathName}_route.dart';
 ''';
 
   enumContent = newImports + enumContent;
 
   // 1. Replace the semicolon at the end of the last enum entry with a comma and add the new enum entry
   enumContent = enumContent.replaceFirst(
-      RegExp(r'(\s*unknown;)'), '\n  $featureName, \n  unknown;');
+      RegExp(r'(\s*unknown;)'), '\n  $featureVariableName, \n  unknown;');
 
   // 2. Insert new cases for fromString, toPathString, and getAppRoute methods
   // Insert the new case for fromString method
   enumContent = enumContent.replaceFirstMapped(
       RegExp(r'(default:\s+return RoutePath\.unknown;)'),
       (match) =>
-          "case '/$featureName':\n        return RoutePath.$featureName;\n      ${match.group(0)}");
+          "case '/$featureVariableName':\n        return RoutePath.$featureVariableName;\n      ${match.group(0)}");
 
   // Insert the new case for toPathString method
   enumContent = enumContent.replaceFirstMapped(
       RegExp(r"(default:\s+return '';)", multiLine: true),
       (match) =>
-          "case RoutePath.$featureName:\n        return '/$featureName';\n      ${match.group(0)}");
+          "case RoutePath.$featureVariableName:\n        return '/$featureVariableName';\n      ${match.group(0)}");
 
   // Insert the new case for getAppRoute method
   enumContent = enumContent.replaceFirstMapped(
       RegExp(r'(default:\s+return UnknownRoute\(arguments: arguments\);)'),
       (match) =>
-          "case RoutePath.$featureName:\n        if (arguments is! ${featureName.capitalize()}Argument) {\n          throw Exception('${featureName.capitalize()}Argument is required');\n        }\n        return ${featureName.capitalize()}Route(arguments: arguments);\n      ${match.group(0)}");
+          "case RoutePath.$featureVariableName:\n        if (arguments is! ${featureClassName}Argument) {\n          throw Exception('${featureClassName}Argument is required');\n        }\n        return ${featureClassName}Route(arguments: arguments);\n      ${match.group(0)}");
 
   // Write the updated content back to the file
   try {
     enumFilePath.writeAsStringSync(enumContent);
-    print('RoutePath updated successfully with new feature: $featureName');
+    print('RoutePath updated successfully with new feature');
   } catch (e) {
     print('Failed to update RoutePath: $e');
   }
+}
+
+String convertToSnakeCase(String text) {
+  return text.replaceAll(RegExp(r'\s+'), '_').toLowerCase();
+}
+
+String convertSnakeCaseToCamelCase(String snakeCase) {
+  return snakeCase
+      .split('_')
+      .asMap()
+      .map((index, word) {
+        if (index == 0) {
+          return MapEntry(index, word);
+        } else {
+          return MapEntry(index, word[0].toUpperCase() + word.substring(1));
+        }
+      })
+      .values
+      .join('');
 }
 
 extension StringExtension on String {
