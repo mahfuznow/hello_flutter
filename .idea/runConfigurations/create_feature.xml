@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="create_feature" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
+  <configuration default="false" name="create_feature" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application" focusToolWindowBeforeRun="true">
     <option name="filePath" value="$PROJECT_DIR$/lib/presentation/feature/create_feature.dart" />
     <option name="workingDirectory" value="$PROJECT_DIR$/lib/presentation/feature" />
     <method v="2" />
