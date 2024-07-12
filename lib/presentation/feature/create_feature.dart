@@ -1,7 +1,6 @@
 import 'dart:io';
 
-const String packageDir = 'hello_flutter';
-const String presentationDir = '$packageDir/presentation';
+const String presentationDir = 'presentation';
 const String baseDir = '$presentationDir/base';
 
 const String baseBindingFile = '$baseDir/base_binding.dart';
@@ -49,6 +48,8 @@ String get featureViewModelFile =>
 String get featureAdaptiveUiFile =>
     '$featurePath/${featurePathName}_adaptive_ui.dart';
 
+const String packageName = 'package:hello_flutter';
+
 void main(List<String> arguments) {
   String? inputFeatureName = '';
 
@@ -90,7 +91,7 @@ void createFeatureStructure() {
   ];
 
   final files = {
-    featureBindingDir: bindingContent(),
+    featureBindingFile: bindingContent(),
     featureArgumentFile: argumentContent(),
     featureRouteFile: routeContent(),
     featureMobilePortraitFile: mobilePortraitContent(),
@@ -123,7 +124,7 @@ void createFeatureStructure() {
 }
 
 String bindingContent() => '''
-import 'package:$baseBindingFile';
+import '$packageName/$baseBindingFile';
 
 class ${featureClassName}Binding extends BaseBinding {
   @override
@@ -142,7 +143,7 @@ class ${featureClassName}Binding extends BaseBinding {
 ''';
 
 String argumentContent() => '''
-import 'package:$baseArgumentFile';
+import '$packageName/$baseArgumentFile';
 
 class ${featureClassName}Argument extends BaseArgument {
   // int id;
@@ -154,10 +155,10 @@ class ${featureClassName}Argument extends BaseArgument {
 
 String routeContent() => '''
 import 'package:flutter/material.dart';
-import '$baseRouteFile';
-import '$navigationRouteFilePath';
-import '$featureAdaptiveUiFile';
-import '$featureArgumentFile';
+import '$packageName/$baseRouteFile';
+import '$packageName/$navigationRouteFilePath';
+import '$packageName/$featureAdaptiveUiFile';
+import '$packageName/$featureArgumentFile';
 
 class ${featureClassName}Route extends BaseRoute<${featureClassName}Argument> {
   @override
@@ -174,8 +175,8 @@ class ${featureClassName}Route extends BaseRoute<${featureClassName}Argument> {
 
 String mobilePortraitContent() => '''
 import 'package:flutter/material.dart';
-import '$baseUiStateFile';
-import '$featureViewModelFile';
+import '$packageName/$baseUiStateFile';
+import '$packageName/$featureViewModelFile';
 
 class ${featureClassName}MobilePortrait extends StatefulWidget {
   final ${featureClassName}ViewModel viewModel;
@@ -206,7 +207,7 @@ class ${featureClassName}MobilePortraitState extends BaseUiState<${featureClassN
 
 String mobileLandscapeContent() => '''
 import 'package:flutter/material.dart';
-import '$featureMobilePortraitFile';
+import '$packageName/$featureMobilePortraitFile';
 
 class ${featureClassName}MobileLandscape extends ${featureClassName}MobilePortrait {
   const ${featureClassName}MobileLandscape({required super.viewModel, super.key});
@@ -235,13 +236,13 @@ class ${featureClassName}MobileLandscapeState extends ${featureClassName}MobileP
 
 String adaptiveUiContent() => '''
 import 'package:flutter/material.dart';
-import '$baseAdaptiveUiFile';
-import '$featureBindingDir;
-import '$featureArgumentFile';
-import '$featureViewModelFile';
-import '$featureRouteFile';
-import '$featureMobilePortraitFile';
-import '$featureMobileLandscapeFile';
+import '$packageName/$baseAdaptiveUiFile';
+import '$packageName/$featureBindingFile';
+import '$packageName/$featureArgumentFile';
+import '$packageName/$featureViewModelFile';
+import '$packageName/$featureRouteFile';
+import '$packageName/$featureMobilePortraitFile';
+import '$packageName/$featureMobileLandscapeFile';
 
 class ${featureClassName}AdaptiveUi extends BaseAdaptiveUi<${featureClassName}Argument, ${featureClassName}Route> {
   const ${featureClassName}AdaptiveUi({super.key});
@@ -268,8 +269,8 @@ class ${featureClassName}AdaptiveUiState extends BaseAdaptiveUiState<${featureCl
 
 String viewModelContent() => '''
 import 'package:flutter/foundation.dart';
-import '$baseViewModelFile';
-import '$featureArgumentFile';
+import '$packageName/$baseViewModelFile';
+import '$packageName/$featureArgumentFile';
 
 class ${featureClassName}ViewModel extends BaseViewModel<${featureClassName}Argument> {
 
@@ -307,8 +308,8 @@ void updateRoutePath() {
 
   // Add necessary imports for new feature after the last import statement
   final newImports = '''
-import '$featureArgumentFile';
-import '$featureRouteFile';
+import '$packageName/$featureArgumentFile';
+import '$packageName/$featureRouteFile';
 ''';
 
   enumContent = newImports + enumContent;
