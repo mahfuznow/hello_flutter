@@ -1,10 +1,12 @@
 # Flutter Boilerplate
 
-A starter template for Flutter projects designed to streamline the development process and ensure a scalable, maintainable codebase.
+A starter template for Flutter projects designed to streamline the development process and ensure a
+scalable, maintainable codebase.
 
 ## Features
 
-- **Dynamic Layouts**: Adjusts based on device type (Mobile/Tablet) and orientation (Portrait/Landscape).
+- **Dynamic Layouts**: Adjusts based on device type (Mobile/Tablet) and orientation (
+  Portrait/Landscape).
 - **MVVM Architecture**: Preconfigured with a base setup for scalable code structure.
 - **State Management**: Utilizes `ValueNotifier` for efficient and simple state management.
 - **Network Calls**: Integrated with the `http` package for making network requests.
@@ -42,13 +44,14 @@ A starter template for Flutter projects designed to streamline the development p
    ```
 
 3. **Set up environment variables**:
-   - Create the following files in `lib/env` directory:
-      1. `.env.dev`
-      2. `.env.test`
-      3. `.env.staging`
-      4. `.env.prod`
-      
-   - These files should contain the environment variables for each environment. The files should be in the following format:
+    - Create the following files in `lib/env` directory:
+        1. `.env.dev`
+        2. `.env.test`
+        3. `.env.staging`
+        4. `.env.prod`
+
+    - These files should contain the environment variables for each environment. The files should be
+      in the following format:
     ```text
     API_BASE_URL=''
     API_KEY=''
@@ -65,6 +68,17 @@ flutter run --flavor flavor_staging -t lib/main/main_flavor_staging.dart
 flutter run --flavor flavor_prod -t lib/main/main_flavor_prod.dart
 ```
 
+### Generate boilerplate code for new feature
+
+Either you can use the `create_feature` run configuration to run the script then input the feature
+name in the run console
+orElse,
+
+```bash
+cd lib
+dart create_feature.dart feature_name
+```
+
 ## Contributing
 
 Contributions are welcome! Please submit a pull request or open an issue to discuss your ideas.
@@ -75,8 +89,11 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Contact
 
-For any questions or suggestions, feel free to reach out to [mahfuzur.rahman@brainstation-23.com](mailto:mahfuzur.rahman@brainstation-23.com).
+For any questions or suggestions, feel free to reach out
+to [mahfuzur.rahman@brainstation-23.com](mailto:mahfuzur.rahman@brainstation-23.com).
 
 ---
 
-This boilerplate is intended to provide a strong foundation for Flutter applications. By adhering to best practices and a structured architecture, it aims to help developers create robust and scalable applications efficiently. Happy coding!
+This boilerplate is intended to provide a strong foundation for Flutter applications. By adhering to
+best practices and a structured architecture, it aims to help developers create robust and scalable
+applications efficiently. Happy coding!

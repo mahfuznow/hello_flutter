@@ -11,14 +11,14 @@ import 'package:hello_flutter/presentation/feature/movieDetails/route/movie_deta
 import 'package:hello_flutter/presentation/navigation/unknown_page_route.dart';
 
 enum RoutePath {
-  unknown,
   login,
   home,
   movieList,
   movieSearch,
   movieBookmark,
   setting,
-  movieDetails;
+  movieDetails,
+  unknown;
 
   static RoutePath fromString(String? path) {
     switch (path) {
