@@ -30,10 +30,10 @@ String get featureBindingFile =>
 String get featureScreenDir => '$featurePath/screen';
 
 String get featureMobilePortraitFile =>
-    '$featureScreenDir/_mobile_portrait.dart';
+    '$featureScreenDir/${featurePathName}_mobile_portrait.dart';
 
 String get featureMobileLandscapeFile =>
-    '$featureScreenDir/_mobile_landscape.dart';
+    '$featureScreenDir/${featurePathName}_mobile_landscape.dart';
 
 String get featureRouteDir => '$featurePath/route';
 
