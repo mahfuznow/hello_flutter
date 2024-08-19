@@ -81,7 +81,7 @@ name in the run console
 orElse,
 
 ```bash
-cd lib
+cd lib/presentation/feature
 dart create_feature.dart feature_name
 ```
 
