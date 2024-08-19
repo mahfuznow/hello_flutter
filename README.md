@@ -9,17 +9,23 @@ scalable, maintainable codebase.
   Portrait/Landscape).
 - **MVVM Architecture**: Preconfigured with a base setup for scalable code structure.
 - **State Management**: Utilizes `ValueNotifier` for efficient and simple state management.
+- **Base classes**: Utilized Base classes for reduce developer effort for common functionalities.
 - **Network Calls**: Integrated with the `http` package for making network requests.
 - **Navigation**: Employs Navigator 2.0 with support for passing arguments between screens.
 - **Localizations**: Built-in support for multiple languages.
 - **Material Theme**: Customizable dark and light themes.
 - **Environment Configuration**: Managed using `DotEnv` for different environments.
 - **Build Flavors**: Supports multiple build flavors including Dev, Test, Staging, and Prod.
+- **Dependency Injection**: Created our own Dependency container so that it doesn't depends on third
+  party library.
+- **Modular approach**: Data, Domain layer is separated by making them individual flutter package
+- **Code Generation**: When we need to add a new feature we can run script to generate all the
+  necessary code to start with following our architecture.
 
 ## TODO
 
-- **Dependency Injection**: Integrate a DI framework.
-- **Code Generation**: Add support for code generation tools.
+- **Local Database setup**: Local SQL database setup & integration
+- **Dummy/Mock Data**: Mocking API response
 - **Unit Testing**: Set up a comprehensive unit testing framework.
 - **CI/CD**: Configure Continuous Integration and Continuous Deployment pipelines.
 
