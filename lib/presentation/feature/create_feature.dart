@@ -168,7 +168,11 @@ class ${featureClassName}Route extends BaseRoute<${featureClassName}Argument> {
 
   @override
   MaterialPageRoute toMaterialPageRoute() {
-    return MaterialPageRoute(builder: (_) => const ${featureClassName}AdaptiveUi());
+    return MaterialPageRoute(
+      builder: (_) => ${featureClassName}AdaptiveUi(
+        argument: arguments,
+      ),
+    );
   }
 }
 ''';
@@ -245,7 +249,7 @@ import '$packageName/$featureMobilePortraitFile';
 import '$packageName/$featureMobileLandscapeFile';
 
 class ${featureClassName}AdaptiveUi extends BaseAdaptiveUi<${featureClassName}Argument, ${featureClassName}Route> {
-  const ${featureClassName}AdaptiveUi({super.key});
+  const ${featureClassName}AdaptiveUi({super.argument, super.key});
 
   @override
   State<StatefulWidget> createState() => ${featureClassName}AdaptiveUiState();
