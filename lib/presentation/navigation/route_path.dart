@@ -8,6 +8,8 @@ import 'package:hello_flutter/presentation/feature/home/route/home_argument.dart
 import 'package:hello_flutter/presentation/feature/home/route/home_route.dart';
 import 'package:hello_flutter/presentation/feature/movieDetails/route/movie_details_argument.dart';
 import 'package:hello_flutter/presentation/feature/movieDetails/route/movie_details_route.dart';
+import 'package:hello_flutter/presentation/feature/settings/route/settings_argument.dart';
+import 'package:hello_flutter/presentation/feature/settings/route/settings_route.dart';
 import 'package:hello_flutter/presentation/navigation/unknown_page_route.dart';
 
 enum RoutePath {
@@ -83,6 +85,11 @@ enum RoutePath {
           throw Exception('MovieDetailsArgument is required');
         }
         return MovieDetailsRoute(arguments: arguments);
+      case RoutePath.setting:
+        if (arguments is! SettingsArgument) {
+          throw Exception('SettingsArgument is required');
+        }
+        return SettingsRoute(arguments: arguments);
       default:
         return UnknownRoute(arguments: arguments);
     }
