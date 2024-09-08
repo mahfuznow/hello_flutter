@@ -127,5 +127,33 @@
   "genre__thriller": "Thriller",
   "@genre__thriller": {
     "type": "text"
+  },
+  "theme": "Theme",
+  "@theme": {
+    "type": "text"
+  },
+  "system_default": "System Default",
+  "@system_default": {
+    "type": "text"
+  },
+  "light_theme": "Light Theme",
+  "@light_theme": {
+    "type": "text"
+  },
+  "dark_theme": "Dark Theme",
+  "@dark_theme": {
+    "type": "text"
+  },
+  "language": "Language",
+  "@language": {
+    "type": "text"
+  },
+  "en": "English",
+  "@en": {
+    "type": "text"
+  },
+  "nb": "Norwegian",
+  "@nb": {
+    "type": "text"
   }
 }
