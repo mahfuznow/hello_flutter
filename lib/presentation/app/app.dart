@@ -62,9 +62,6 @@ class _MyAppState extends BaseUiState<MyApp> {
                 return ScreenUtilBuilder(child: child);
               },
               debugShowCheckedModeBanner: false,
-              // onGenerateInitialRoutes: (String initialRouteName) {
-              //   return AppRouter.generateInitialRoutes(initialRouteName);
-              // },
               initialRoute: AppRouter.initialRoute,
               onGenerateRoute: AppRouter.generateRoute,
             );
