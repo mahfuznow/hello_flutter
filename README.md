@@ -85,6 +85,11 @@ cd lib/presentation/feature
 dart create_feature.dart feature_name
 ```
 
+### Flutter App Security Measures
+
+See [Flutter App Security Measures](doc/security.md) for more information on securing your Flutter
+app.
+
 ## Contributing
 
 Contributions are welcome! Please submit a pull request or open an issue to discuss your ideas.
