@@ -25,7 +25,6 @@ class SettingsMobilePortraitState extends BaseUiState<SettingsMobilePortrait> {
               listenable: widget.viewModel.appViewModel.selectedThemeMode,
               builder: (context, selectedTheme) {
                 return Card(
-                  color: Theme.of(context).colorScheme.tertiary,
                   child: ExpansionTile(
                     title: Text(
                       context.localizations.theme,
@@ -58,7 +57,6 @@ class SettingsMobilePortraitState extends BaseUiState<SettingsMobilePortrait> {
               listenable: widget.viewModel.appViewModel.selectedLanguage,
               builder: (context, selectedLanguage) {
                 return Card(
-                  color: Theme.of(context).colorScheme.tertiary,
                   child: ExpansionTile(
                     title: Text(
                       context.localizations.language,
