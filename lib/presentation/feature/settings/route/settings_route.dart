@@ -12,6 +12,8 @@ class SettingsRoute extends BaseRoute<SettingsArgument> {
 
   @override
   MaterialPageRoute toMaterialPageRoute() {
-    return MaterialPageRoute(builder: (_) => const SettingsAdaptiveUi());
+    return MaterialPageRoute(
+      builder: (_) => SettingsAdaptiveUi(argument: super.arguments),
+    );
   }
 }

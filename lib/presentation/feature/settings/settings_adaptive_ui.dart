@@ -9,7 +9,7 @@ import 'package:hello_flutter/presentation/feature/settings/settings_view_model.
 
 class SettingsAdaptiveUi
     extends BaseAdaptiveUi<SettingsArgument, SettingsRoute> {
-  const SettingsAdaptiveUi({super.key});
+  const SettingsAdaptiveUi({super.argument, super.key});
 
   @override
   State<StatefulWidget> createState() => SettingsAdaptiveUiState();
