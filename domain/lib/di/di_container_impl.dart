@@ -94,24 +94,37 @@ enum DependencyError implements Exception {
   notRegistered,
 }
 
+// Example Scenario
+//
+// Let’s consider an example where this mechanism is important. Assume two asynchronous operations register and resolve are called nearly at the same time.
+//
+// Without a lock:
+//
+// •	register could start modifying the _dependencies map.
+// •	Meanwhile, resolve could be trying to read from the same map concurrently.
+// •	This concurrent access may lead to race conditions and inconsistent state (e.g., the map could be read while being modified).
+//
+// With the lock:
+//
+// •	The first operation (say register) creates a lock (Completer<void>()) and starts.
+// •	The second operation (say resolve) checks the lock (await _completer!.future) and waits until the first operation finishes.
+// •	Once register completes and the lock is released (_completer!.complete()), the second operation can proceed safely, knowing that the map is in a consistent state.
+
 class AsyncLock {
-  Completer<void>? _lock;
+  Completer<void>? _completer;
 
   Future<T> synchronized<T>(FutureOr<T> Function() action) async {
-    _lock ??= Completer<void>();
-
-    if (!_lock!.isCompleted) {
-      _lock!.complete();
+    if (_completer != null) {
+      await _completer!.future; // Wait for any ongoing operation
     }
 
-    await _lock!.future;
+    _completer = Completer<void>(); // Create a new lock
+
     try {
-      return action();
+      return await action();
     } finally {
-      if (!_lock!.isCompleted) {
-        _lock!.complete();
-      }
-      _lock = null; // Reset lock after completion
+      _completer!.complete(); // Complete the lock after execution
+      _completer = null; // Reset the lock
     }
   }
 }
