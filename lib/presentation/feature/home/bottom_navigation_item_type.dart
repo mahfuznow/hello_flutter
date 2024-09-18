@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hello_flutter/presentation/feature/home/movie_list/movie_list_adaptive_ui.dart';
+import 'package:hello_flutter/presentation/feature/settings/settings_adaptive_ui.dart';
 
 enum NavigationItemType {
   movieList,
@@ -42,7 +43,7 @@ enum NavigationItemType {
       case NavigationItemType.movieBookmark:
         return const Center(child: Text('Bookmark'));
       case NavigationItemType.settings:
-        return const Center(child: Text('Settings'));
+        return const SettingsAdaptiveUi();
     }
   }
 
