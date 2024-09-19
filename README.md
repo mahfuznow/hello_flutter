@@ -50,18 +50,7 @@ scalable, maintainable codebase.
    ```
 
 3. **Set up environment variables**:
-    - Create the following files in `lib/env` directory:
-        1. `.env.dev`
-        2. `.env.test`
-        3. `.env.staging`
-        4. `.env.prod`
-
-    - These files should contain the environment variables for each environment. The files should be
-      in the following format:
-    ```text
-    API_BASE_URL=''
-    API_KEY=''
-    ```
+   See [Environment setup guide](env/README.md) for more information.
 
 ### Running the App
 
@@ -84,6 +73,12 @@ orElse,
 cd lib/presentation/feature
 dart create_feature.dart feature_name
 ```
+
+### Flutter App Best Practices
+
+See [Flutter App Best Practices](doc/best_practices.md) for more information on general best
+practices for any Flutter app.
+app.
 
 ### Flutter App Security Measures
 
