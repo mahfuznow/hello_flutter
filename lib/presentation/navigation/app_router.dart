@@ -32,6 +32,16 @@ class AppRouter {
     Navigator.pop(context);
   }
 
+  static void navigateToAndClearStack(
+      BuildContext context, BaseRoute appRoute) {
+    Navigator.pushNamedAndRemoveUntil(
+      context,
+      appRoute.routePath.toPathString,
+      (route) => false,
+      arguments: appRoute.arguments,
+    );
+  }
+
   static void pushReplacement(BuildContext context, BaseRoute appRoute) {
     Navigator.pushReplacementNamed(
       context,
