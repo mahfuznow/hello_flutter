@@ -126,8 +126,9 @@ abstract class BaseAdaptiveUiState<
 
   /// This listener is used to listen to the base state changes of baseViewModel and perform the UI action accordingly
   void _baseStateListener() {
-    if (!mounted)
+    if (!mounted) {
       return; //This is used to check if the widget is still mounted or not
+    }
     BaseState baseState = viewModel.baseState.value;
     if (baseState is ShowLoadingDialogBaseState) {
       if (isShowingLoadingDialog) return;
@@ -143,6 +144,7 @@ abstract class BaseAdaptiveUiState<
         context: context,
         destination: baseState.destination,
         isReplacement: baseState.isReplacement,
+        isClearBackStack: baseState.isClearBackStack,
         onPop: baseState.onPop,
       );
     }
@@ -191,10 +193,15 @@ abstract class BaseAdaptiveUiState<
     required BuildContext context,
     required BaseRoute destination,
     bool isReplacement = false,
+    bool isClearBackStack = false,
     void Function()? onPop,
   }) async {
     if (isReplacement) {
-      AppRouter.pushReplacement(context, destination);
+      if (isClearBackStack) {
+        AppRouter.navigateToAndClearStack(context, destination);
+      } else {
+        AppRouter.navigateTo(context, destination);
+      }
     } else {
       AppRouter.navigateTo(context, destination);
       if (onPop != null) {

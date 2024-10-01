@@ -11,11 +11,13 @@ class DismissLoadingDialogBaseState extends BaseState {}
 class NavigateBaseState extends BaseState {
   final BaseRoute destination;
   final bool isReplacement;
+  final bool isClearBackStack;
   void Function()? onPop;
 
   NavigateBaseState({
     required this.destination,
     required this.isReplacement,
+    this.isClearBackStack = false,
     this.onPop,
   });
 }

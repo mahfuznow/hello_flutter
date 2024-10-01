@@ -43,11 +43,13 @@ abstract class BaseViewModel<A extends BaseArgument> {
   void navigateToScreen({
     required BaseRoute destination,
     bool? isReplacement,
+    bool? isClearBackStack,
     void Function()? onPop,
   }) {
     _baseState.value = NavigateBaseState(
       destination: destination,
       isReplacement: isReplacement ?? false,
+      isClearBackStack: isClearBackStack ?? false,
       onPop: onPop,
     );
   }
