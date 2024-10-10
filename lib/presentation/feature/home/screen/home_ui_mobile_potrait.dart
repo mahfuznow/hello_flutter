@@ -63,7 +63,7 @@ class HomeUiMobilePortraitState extends BaseUiState<HomeUiMobilePortrait> {
                 (e) => NavigationDestination(
                   icon: Icon(e.icon),
                   selectedIcon: Icon(e.selectedIcon),
-                  label: e.label,
+                  label: e.getLocalizedName(context.localizations),
                 ),
               )
               .toList(),

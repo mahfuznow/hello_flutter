@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hello_flutter/presentation/feature/home/movie_list/movie_list_adaptive_ui.dart';
 import 'package:hello_flutter/presentation/feature/settings/settings_adaptive_ui.dart';
+import 'package:hello_flutter/presentation/localization/generated/app_localizations.dart';
 
 enum NavigationItemType {
   movieList,
@@ -47,16 +48,18 @@ enum NavigationItemType {
     }
   }
 
-  String get label {
+  String getLocalizedName(AppLocalizations localizations) {
     switch (this) {
       case NavigationItemType.movieList:
-        return 'Movie List';
+        return localizations.navigation_item__home;
       case NavigationItemType.movieSearch:
-        return 'Search';
+        return localizations.navigation_item__search;
       case NavigationItemType.movieBookmark:
-        return 'Bookmark';
+        return localizations.navigation_item__bookmark;
       case NavigationItemType.settings:
-        return 'Settings';
+        return localizations.navigation_item__settings;
+      default:
+        return '';
     }
   }
 }

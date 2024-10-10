@@ -34,8 +34,8 @@ class _LanguageSettingsState extends BaseUiState<LanguageSettings> {
                 selectedLanguage,
               ),
               _buildLanguageOption(
-                AppLanguage.nb,
-                context.localizations.nb,
+                AppLanguage.ja,
+                context.localizations.ja,
                 selectedLanguage,
               ),
             ],

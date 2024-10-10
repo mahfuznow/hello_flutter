@@ -1,7 +1,11 @@
 {
   "@@locale": "en",
-  "app_name": "Hello Flutter",
+  "app_name": "Health App",
   "@app_name": {
+    "type": "text"
+  },
+  "must": "must",
+  "@must": {
     "type": "text"
   },
   "error__network_error_with_error_and_message": "Network Error: {code} : {message}",
@@ -18,6 +22,66 @@
   },
   "error_massage__an_error_occurred_please_try_again_later": "An error occurred. Please try again later.",
   "@error_massage__an_error_occurred_please_try_again_later": {
+    "type": "text"
+  },
+  "login__email_text": "Email",
+  "@login__email_text": {
+    "type": "text"
+  },
+  "login__please_provide_your_email_text": "Please provide your email",
+  "@login__please_provide_your_email_text": {
+    "type": "text"
+  },
+  "login__password_text": "Password",
+  "@login__password_text": {
+    "type": "text"
+  },
+  "login__please_provide_your_password_text": "Please provide your password",
+  "@login__please_provide_your_password_text": {
+    "type": "text"
+  },
+  "login__terms_of_use_text": "Terms of use",
+  "@login__terms_of_use_text": {
+    "type": "text"
+  },
+  "login__you_must_agree_with_our_terms_and_condition_text": "You must agree with our terms and condition",
+  "@login__you_must_agree_with_our_terms_and_condition_text": {
+    "type": "text"
+  },
+  "login__privacy_policy_text": "Privacy policy",
+  "@login__privacy_policy_text": {
+    "type": "text"
+  },
+  "login__you_must_agree_with_our_privacy_policy_text": "You must agree with our privacy policy",
+  "@login__you_must_agree_with_our_privacy_policy_text": {
+    "type": "text"
+  },
+  "login__login_button_text": "Login button",
+  "@login__login_button_text": {
+    "type": "text"
+  },
+  "login__login_pressed_this_button_for_login_text": "Press this button for login",
+  "@login__login_pressed_this_button_for_login_text": {
+    "type": "text"
+  },
+  "login__instruction_text": "Please login in using the account ID and password provided in your registration instructions.",
+  "@login__instruction_text": {
+    "type": "text"
+  },
+  "login__account_id_text": "Account ID",
+  "@login__account_id_text": {
+    "type": "text"
+  },
+  "login__example_text": "example@i@kirin.co.jp",
+  "@login__example_text": {
+    "type": "text"
+  },
+  "login__agree_to_the_terms_of_use_text": "I agree to the terms of use",
+  "@login__agree_to_the_terms_of_use_text": {
+    "type": "text"
+  },
+  "login__agree_to_the_privacy_policy_text": "I agree to the privacy policy",
+  "@login__agree_to_the_privacy_policy_text": {
     "type": "text"
   },
   "login__forgot_password_text": "Forgot your password?",
@@ -152,8 +216,24 @@
   "@en": {
     "type": "text"
   },
-  "nb": "Norwegian",
-  "@nb": {
+  "ja": "Japanese",
+  "@ja": {
+    "type": "text"
+  },
+  "navigation_item__home": "Home",
+  "@navigation_item__home": {
+    "type": "text"
+  },
+  "navigation_item__bookmark": "Bookmark",
+  "@navigation_item__bookmark": {
+    "type": "text"
+  },
+  "navigation_item__search": "Search",
+  "@navigation_item__search": {
+    "type": "text"
+  },
+  "navigation_item__settings": "Settings",
+  "@navigation_item__settings": {
     "type": "text"
   }
 }

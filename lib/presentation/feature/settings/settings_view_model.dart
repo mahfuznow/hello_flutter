@@ -6,6 +6,7 @@ import 'package:hello_flutter/presentation/feature/settings/route/settings_argum
 
 class SettingsViewModel extends BaseViewModel<SettingsArgument> {
   SettingsViewModel({required this.appViewModel});
+
   final AppViewModel appViewModel;
 
   @override
@@ -14,10 +15,16 @@ class SettingsViewModel extends BaseViewModel<SettingsArgument> {
   }
 
   void onThemeChanged(AppThemeMode? value) {
-    appViewModel.onThemeChanged(value);
+    if (value == null) {
+      return;
+    }
+    appViewModel.onThemeChangeRequest(value);
   }
 
   void onLanguageChanged(AppLanguage? value) {
-    appViewModel.onLanguageChanged(value);
+    if (value == null) {
+      return;
+    }
+    appViewModel.onLanguageChangeRequest(value);
   }
 }

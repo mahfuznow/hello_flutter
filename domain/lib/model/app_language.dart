@@ -1,14 +1,14 @@
 enum AppLanguage {
   en,
-  nb;
+  ja;
 
   @override
   String toString() {
     switch (this) {
       case AppLanguage.en:
         return 'en';
-      case AppLanguage.nb:
-        return 'nb';
+      case AppLanguage.ja:
+        return 'ja';
     }
   }
 
@@ -16,10 +16,10 @@ enum AppLanguage {
     switch (value) {
       case 'en':
         return AppLanguage.en;
-      case 'nb':
-        return AppLanguage.nb;
+      case 'jp':
+        return AppLanguage.ja;
       default:
-        throw ArgumentError('Invalid AppLanguage: $value');
+        return AppLanguage.en;
     }
   }
 }
