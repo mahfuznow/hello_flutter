@@ -92,6 +92,7 @@ class LoginViewModel extends BaseViewModel<LoginArgument> {
 
     navigateToScreen(
       destination: HomeRoute(arguments: HomeArgument(userId: '123')),
+      isClearBackStack: true,
     );
   }
 

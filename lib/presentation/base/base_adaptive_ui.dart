@@ -196,12 +196,10 @@ abstract class BaseAdaptiveUiState<
     bool isClearBackStack = false,
     void Function()? onPop,
   }) async {
-    if (isReplacement) {
-      if (isClearBackStack) {
-        AppRouter.navigateToAndClearStack(context, destination);
-      } else {
-        AppRouter.navigateTo(context, destination);
-      }
+    if (isClearBackStack) {
+      AppRouter.navigateToAndClearStack(context, destination);
+    } else if (isReplacement) {
+      AppRouter.pushReplacement(context, destination);
     } else {
       AppRouter.navigateTo(context, destination);
       if (onPop != null) {
