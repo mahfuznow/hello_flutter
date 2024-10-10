@@ -14,9 +14,14 @@ class AppRouter {
     if (argObj is BaseArgument) {
       arguments = argObj;
     }
-
-    final routePath = RoutePath.fromString(settings.name ?? '');
-    final appRoute = routePath.getAppRoute(arguments: arguments);
+    if (settings.name == null) {
+      throw Exception('Route name is null');
+    }
+    final String routeName = (settings.name == Navigator.defaultRouteName)
+        ? initialRoute
+        : settings.name!;
+    final RoutePath routePath = RoutePath.fromString(routeName);
+    final BaseRoute appRoute = routePath.getAppRoute(arguments: arguments);
     return appRoute.toMaterialPageRoute();
   }
 
