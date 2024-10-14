@@ -61,7 +61,7 @@ class DiContainerImpl extends DiContainer {
     final key = T.toString();
     return await _lock.synchronized(() {
       return (_dependencies.containsKey(key) &&
-              _dependencies[key]!.isNotEmpty) ||
+          _dependencies[key]!.isNotEmpty) ||
           _singletons.containsKey(key);
     });
   }
@@ -114,17 +114,21 @@ class AsyncLock {
   Completer<void>? _completer;
 
   Future<T> synchronized<T>(FutureOr<T> Function() action) async {
+    // Wait for any ongoing operation
     if (_completer != null) {
-      await _completer!.future; // Wait for any ongoing operation
+      await _completer!.future;
     }
 
-    _completer = Completer<void>(); // Create a new lock
+    // Create a new lock
+    final lock = Completer<void>();
+    _completer = lock;
 
     try {
       return await action();
     } finally {
-      _completer!.complete(); // Complete the lock after execution
-      _completer = null; // Reset the lock
+      // Safely complete the lock and reset it
+      lock.complete();
+      _completer = null;
     }
   }
 }
