@@ -13,7 +13,7 @@ class AppRepositoryImpl implements AppRepository {
   Future<AppLanguage> getApplicationLocale() async {
     String? savedAppLanguageLocaleString = await SharedPreferencesManager
         .singleton
-        .getValue<String>('language', null, (obj) => obj as String);
+        .getValue<String?>('language', null, (obj) => obj as String?);
     if (savedAppLanguageLocaleString == null) {
       return AppLanguage.fromString(deviceSettingsLocaleName);
     }
@@ -23,7 +23,7 @@ class AppRepositoryImpl implements AppRepository {
   @override
   Future<AppThemeMode> getApplicationThemeMode() async {
     String? savedAppThemeModeString = await SharedPreferencesManager.singleton
-        .getValue<String>('theme', null, (obj) => obj as String);
+        .getValue<String?>('theme', null, (obj) => obj as String?);
     if (savedAppThemeModeString == null) {
       return AppThemeMode.fromString(deviceSettingsThemeMode);
     }
@@ -35,7 +35,7 @@ class AppRepositoryImpl implements AppRepository {
     return SharedPreferencesManager.singleton.saveValue(
       'language',
       appLanguage.toString(),
-      (obj) => {},
+          (obj) => {},
     );
   }
 
@@ -44,7 +44,7 @@ class AppRepositoryImpl implements AppRepository {
     return SharedPreferencesManager.singleton.saveValue(
       'theme',
       themeMode.toString(),
-      (obj) => {},
+          (obj) => {},
     );
   }
 }
