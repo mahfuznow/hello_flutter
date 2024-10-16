@@ -74,6 +74,58 @@ cd lib/presentation/feature
 dart create_feature.dart feature_name
 ```
 
+## Change App Name and Application ID
+### Android
+Open app/build.gradle file and change the applicationId to your desired app name.
+```bash
+    productFlavors {
+        flavor_dev {
+            dimension "env"
+            applicationId "com.mahfuznow.kirin_health_dev"
+            resValue "string", "app_name", "KIRIN Health Dev"
+        }
+        flavor_test {
+            dimension "env"
+            applicationId "com.mahfuznow.kirin_health_test"
+            resValue "string", "app_name", "KIRIN Healt Test"
+        }
+        flavor_staging {
+            dimension "env"
+            applicationId "com.mahfuznow.kirin_health_staging"
+            resValue "string", "app_name", "KIRIN Health Staging"
+        }
+        flavor_prod {
+            dimension "env"
+            applicationId "com.mahfuznow.kirin_health"
+            resValue "string", "app_name", "KIRIN Health"
+        }
+    }
+```
+### iOS
+- open `ios/Flutter/flavor_devDebug.xcconfig` and change the `BUNDLE_NAME` and `BUNDLE_DISPLAY_NAME` to your desired app name.
+- open `ios/Flutter/flavor_testDebug.xcconfig` and change the `BUNDLE_NAME` and `BUNDLE_DISPLAY_NAME` to your desired app name.
+- open `ios/Flutter/flavor_stagingDebug.xcconfig` and change the `BUNDLE_NAME` and `BUNDLE_DISPLAY_NAME` to your desired app name.
+- open `ios/Flutter/flavor_prodDebug.xcconfig` and change the `BUNDLE_NAME` and `BUNDLE_DISPLAY_NAME` to your desired app name.
+- open `ios/Flutter/flavor_devRelease.xcconfig` and change the `BUNDLE_NAME` and `BUNDLE_DISPLAY_NAME` to your desired app name.
+- open `ios/Flutter/flavor_testRelease.xcconfig` and change the `BUNDLE_NAME` and `BUNDLE_DISPLAY_NAME` to your desired app name.
+- open `ios/Flutter/flavor_stagingRelease.xcconfig` and change the `BUNDLE_NAME` and `BUNDLE_DISPLAY_NAME` to your desired app name.
+- open `ios/Flutter/flavor_prodRelease.xcconfig` and change the `BUNDLE_NAME` and `BUNDLE_DISPLAY_NAME` to your desired app name.
+
+To change the bundle identifier, open the `ios/Runner.xcodeproj` file in Xcode and update manually using Xcode UI for each build type.
+
+## Change App Icon
+### Android
+- Replace the `android/app/src/flavor_dev/res` folder with your desired icon for Dev app.
+- Replace the `android/app/src/flavor_test/res` folder with your desired icon for Test app.
+- Replace the `android/app/src/flavor_staging/res` folder with your desired icon for Staging app.
+- Replace the `android/app/src/main/res` folder with your desired icon for Prod app.
+
+### iOS
+- Replace the `ios/Runner/Assets.xcassets/flavor_devAppIcon.appiconset` folder with your desired icon for Dev app.
+- Replace the `ios/Runner/Assets.xcassets/flavor_testAppIcon.appiconset` folder with your desired icon for Test app.
+- Replace the `ios/Runner/Assets.xcassets/flavor_stagingAppIcon.appiconset` folder with your desired icon for Staging app.
+- Replace the `ios/Runner/Assets.xcassets/AppIcon.appiconset` folder with your desired icon for Prod app.
+
 ### Flutter App Best Practices
 
 See [Flutter App Best Practices](doc/best_practices.md) for more information on general best
