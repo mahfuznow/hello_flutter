@@ -117,7 +117,8 @@ dart create_feature.dart feature_name
 
 ## Flutter
 
-Open `pubspec.yaml` file and change the `name` and `description` to your desired app name.
+In AndroidStudio Go to Edit > Find > Replace in Files (Ctrl + Shift + R) and replace the following
+`hello_flutter` with `your_app_name`.
 
 ### Android
 
