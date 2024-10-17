@@ -28,6 +28,14 @@ scalable, maintainable codebase.
 - **Dummy/Mock Data**: Mocking API response
 - **Unit Testing**: Set up a comprehensive unit testing framework.
 - **CI/CD**: Configure Continuous Integration and Continuous Deployment pipelines.
+- **Unit Testing**: Set up a comprehensive unit testing framework.
+- **Code Quality**: Integrate code coverage tools like SonarQube.
+- **CI/CD**: Configure Continuous Integration and Continuous Deployment pipelines.
+- **Method Channel**: Implement platform-specific code using method channels.
+- **Analytics**: Integrate analytics tools like Firebase Analytics.
+- **Crash Reporting**: Integrate crash reporting tools like Firebase Crashlytics/Sentry.
+- **Push Notifications**: Implement push notifications using Firebase Cloud Messaging.
+- **Deep Linking**: Implement deep linking for navigation within the app.
 
 ## Target Devices
 
