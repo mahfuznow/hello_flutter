@@ -89,6 +89,12 @@ scalable, maintainable codebase.
 
 To run the app with a specific build flavor:
 
+- In the Android Studio, you can choose runConfigurations from the top right corner and select the
+  desired flavor to run the app.
+    - These run configurations are already set up for each flavor at `.idea/runConfigurations` which
+      is tracked by git.
+- Or else if you want to run the app from the terminal, you can use the following commands:
+
 ```bash
 flutter run --flavor flavor_dev -t lib/main/main_flavor_dev.dart
 flutter run --flavor flavor_test -t lib/main/main_flavor_test.dart
