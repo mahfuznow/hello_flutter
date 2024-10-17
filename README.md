@@ -12,8 +12,8 @@ scalable, maintainable codebase.
 - **Base classes**: Utilized Base classes for reduce developer effort for common functionalities.
 - **Network Calls**: Integrated with the `http` package for making network requests.
 - **Navigation**: Employs Navigator 2.0 with support for passing arguments between screens.
-- **Localizations**: Built-in support for multiple languages.
-- **Material Theme**: Customizable dark and light themes.
+- **Localizations**: Built-in support for multiple languages. In app language change support.
+- **Material Theme**: Customizable dark and light themes. In-app theme change support.
 - **Environment Configuration**: Managed using `DotEnv` for different environments.
 - **Build Flavors**: Supports multiple build flavors including Dev, Test, Staging, and Prod.
 - **Dependency Injection**: Created our own Dependency container so that it doesn't depends on third
@@ -29,12 +29,29 @@ scalable, maintainable codebase.
 - **Unit Testing**: Set up a comprehensive unit testing framework.
 - **CI/CD**: Configure Continuous Integration and Continuous Deployment pipelines.
 
+## Target Devices
+
+### Android
+
+- **Minimum SDK**: 26 (Android 8.0) (Oreo)
+- **Target SDK**: 34 (Android 14) (Upside Down Cake)
+
+### iOS
+
+- **Minimum iOS Version**: 12.0
+
 ## Getting Started
 
 ### Prerequisites
 
+- Android Studio: [Install Android Studio](https://developer.android.com/studio)
+    - Version: 2024.1.1
+- FVM: [Install FVM](https://fvm.app/documentation/getting-started/installation)
+    - Version: 2.4.1
 - Flutter SDK: [Install Flutter](https://flutter.dev/docs/get-started/install)
+    - Version: 3.24.3
 - Dart SDK: Included with Flutter
+    - Version: 3.5.3
 
 ### Installation
 
@@ -43,13 +60,21 @@ scalable, maintainable codebase.
    git clone https://github.com/yourusername/flutter-boilerplate.git
    cd flutter-boilerplate
    ```
-
-2. **Install dependencies**:
+1. **Set up FVM**:
    ```bash
-   flutter pub get
+   fvm install 3.24.3
+   fvm use 3.24.3
    ```
-
-3. **Set up environment variables**:
+1. **Setup Flutter SDK in Android Studio**:
+    - Open Android Studio
+    - Go to `File > Settings > Languages & Frameworks > Flutter`
+    - Set the FVM Flutter SDK path to the location of your Flutter SDK
+    - Click `Apply` and then `OK`
+1. **Install dependencies**:
+   ```bash
+   fvm flutter pub get
+   ```
+1. **Set up environment variables**:
    See [Environment setup guide](env/README.md) for more information.
 
 ### Running the App
@@ -73,6 +98,104 @@ orElse,
 cd lib/presentation/feature
 dart create_feature.dart feature_name
 ```
+
+## Change App Name and Application ID
+
+## Flutter
+
+Open `pubspec.yaml` file and change the `name` and `description` to your desired app name.
+
+### Android
+
+- Open `app/build.gradle` file and change the applicationId to your desired app name.
+
+```bash
+     defaultConfig {
+        applicationId "com.mahfuznow.hello_flutter"
+    }
+    productFlavors {
+        flavor_dev {
+            dimension "env"
+            applicationId "com.mahfuznow.hello_flutter_dev"
+            resValue "string", "app_name", "Hello Flutter Dev"
+        }
+        flavor_test {
+            dimension "env"
+            applicationId "com.mahfuznow.hello_flutter_test"
+            resValue "string", "app_name", "Hello Flutter Test"
+        }
+        flavor_staging {
+            dimension "env"
+            applicationId "com.mahfuznow.hello_flutter_staging"
+            resValue "string", "app_name", "Hello Flutter Staging"
+        }
+        flavor_prod {
+            dimension "env"
+            applicationId "com.mahfuznow.hello_flutter"
+            resValue "string", "app_name", "Hello Flutter"
+        }
+    }
+```
+
+- Rename the `android/app/src/main/kotlin/com/mahfuznow/hello_flutter` folder to your desired
+  application name.
+- Update the package declaration in the `MainActivity.kt` file to match the new folder name.
+    - For example, if the folder is renamed to `com/mahfuznow/hello_flutter`, the package
+      declaration
+      should be `package com.mahfuznow.hello_flutter`.
+
+### iOS
+
+- open `ios/Flutter/flavor_devDebug.xcconfig` and change the `BUNDLE_NAME` and `BUNDLE_DISPLAY_NAME`
+  to your desired app name.
+- open `ios/Flutter/flavor_testDebug.xcconfig` and change the `BUNDLE_NAME`
+  and `BUNDLE_DISPLAY_NAME` to your desired app name.
+- open `ios/Flutter/flavor_stagingDebug.xcconfig` and change the `BUNDLE_NAME`
+  and `BUNDLE_DISPLAY_NAME` to your desired app name.
+- open `ios/Flutter/flavor_prodDebug.xcconfig` and change the `BUNDLE_NAME`
+  and `BUNDLE_DISPLAY_NAME` to your desired app name.
+- open `ios/Flutter/flavor_devRelease.xcconfig` and change the `BUNDLE_NAME`
+  and `BUNDLE_DISPLAY_NAME` to your desired app name.
+- open `ios/Flutter/flavor_testRelease.xcconfig` and change the `BUNDLE_NAME`
+  and `BUNDLE_DISPLAY_NAME` to your desired app name.
+- open `ios/Flutter/flavor_stagingRelease.xcconfig` and change the `BUNDLE_NAME`
+  and `BUNDLE_DISPLAY_NAME` to your desired app name.
+- open `ios/Flutter/flavor_prodRelease.xcconfig` and change the `BUNDLE_NAME`
+  and `BUNDLE_DISPLAY_NAME` to your desired app name.
+
+To change the bundle identifier, open the `ios/Runner.xcodeproj` file in Xcode and update manually
+using Xcode UI for each build type.
+
+## Change App Icon
+
+### Generate different app icons for different flavors
+
+- Using [Icon Kitchen](https://icon.kitchen/) we can generate different app icons (Badge) for
+  different flavors.
+- This website will provide the necessary files for both Android and iOS.
+- For Android, we can use the `res` folder which is provided by the website.
+- For iOS, we can upscale the `play_store_512.png` file to 1024x1024 using
+  this [Image Resizer](https://imageresizer.com/), then open the iOS project in
+  Xcode and add this image to the Assets.xcassets folder, setting it as a single size in the image
+  properties.
+
+### Android
+
+- Replace the `android/app/src/flavor_dev/res` folder with your desired icon for Dev app.
+- Replace the `android/app/src/flavor_test/res` folder with your desired icon for Test app.
+- Replace the `android/app/src/flavor_staging/res` folder with your desired icon for Staging app.
+- Replace the `android/app/src/main/res` folder with your desired icon for Prod app.
+
+### iOS
+
+- Replace the `ios/Runner/Assets.xcassets/flavor_devAppIcon.appiconset` folder with your desired
+  icon for Dev app.
+- Replace the `ios/Runner/Assets.xcassets/flavor_testAppIcon.appiconset` folder with your desired
+  icon for Test app.
+- Replace the `ios/Runner/Assets.xcassets/flavor_stagingAppIcon.appiconset` folder with your desired
+  icon for Staging app.
+- Replace the `ios/Runner/Assets.xcassets/AppIcon.appiconset` folder with your desired icon for Prod
+  app.
 
 ### Flutter App Best Practices
 
