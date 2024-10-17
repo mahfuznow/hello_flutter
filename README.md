@@ -118,7 +118,7 @@ dart create_feature.dart feature_name
 ## Flutter
 
 In AndroidStudio Go to Edit > Find > Replace in Files (Ctrl + Shift + R) and replace the following
-`hello_flutter` with `your_app_name`.
+`hello_flutter` with `your_app_name`, and `Hello Flutter` with `Your App Name`
 
 ### Android
 

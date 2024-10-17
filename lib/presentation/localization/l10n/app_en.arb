@@ -1,6 +1,6 @@
 {
   "@@locale": "en",
-  "app_name": "Health App",
+  "app_name": "Hello Flutter",
   "@app_name": {
     "type": "text"
   },
