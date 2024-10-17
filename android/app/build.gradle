@@ -50,7 +50,7 @@ flutter {
 }
 
 android {
-    namespace "com.sbu_europe.hello_flutter.hello_flutter"
+    namespace "com.mahfuznow.hello_flutter"
     compileSdkVersion flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
 
@@ -82,6 +82,8 @@ android {
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+
+        multiDexEnabled true
     }
 
     buildTypes {

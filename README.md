@@ -110,9 +110,13 @@ Open `pubspec.yaml` file and change the `name` and `description` to your desired
 - Open `app/build.gradle` file and change the applicationId to your desired app name.
 
 ```bash
-     defaultConfig {
+android {
+    namespace "com.mahfuznow.hello_flutter"
+    
+    defaultConfig {
         applicationId "com.mahfuznow.hello_flutter"
     }
+    
     productFlavors {
         flavor_dev {
             dimension "env"
@@ -135,10 +139,11 @@ Open `pubspec.yaml` file and change the `name` and `description` to your desired
             resValue "string", "app_name", "Hello Flutter"
         }
     }
+}
 ```
 
 - Rename the `android/app/src/main/kotlin/com/mahfuznow/hello_flutter` folder to your desired
-  application name.
+  package name.
 - Update the package declaration in the `MainActivity.kt` file to match the new folder name.
     - For example, if the folder is renamed to `com/mahfuznow/hello_flutter`, the package
       declaration
