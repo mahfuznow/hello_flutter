@@ -199,6 +199,10 @@ using Xcode UI for each build type.
   Xcode and add this image to the Assets.xcassets folder, setting it as a single size in the image
   properties.
 
+### Flutter
+
+Replace `assets/images/app_logo.png` with your desired icon for the app.
+
 ### Android
 
 - Replace the `android/app/src/flavor_dev/res` folder with your desired icon for Dev app.
